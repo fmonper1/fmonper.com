@@ -4,7 +4,7 @@ function Post({ entry, date, image, title }) {
   let { file, description } = image;
 
   return (
-    <div className="post">
+    <div className="post shadow-md">
       <Link href={`post/${entry.sys.id}`}>
         <a href={`post/${entry.sys.id}`}>
           <img alt={description} src={`https:${file.url}`} />
