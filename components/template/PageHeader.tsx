@@ -47,7 +47,7 @@ const PageHeader = () => {
       </header>
       {show && (
         <div
-          className={`block sm:hidden w-full absolute h-screen z-20 bg-primary-main bg-opacity-50 right-0`}
+          className={`block sm:hidden w-full absolute top-0 h-screen z-20 bg-primary-main bg-opacity-50 right-0`}
         >
           <div
             className={`block sm:hidden w-full sm:w-1/2 flex content-start absolute h-screen z-20 bg-primary-main right-0`}
