@@ -64,7 +64,6 @@ export default function PostPage({ post }) {
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const res = await PostsService.getPostBySlug(String(context.params.id));
-  console.log(res);
 
   return {
     props: {
