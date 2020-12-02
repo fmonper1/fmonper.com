@@ -1,7 +1,7 @@
 import Head from "next/head";
 import PostsService from "@utils/contentfulPosts";
 import Post from "@components/posts/Post";
-import { GetStaticProps } from "next";
+import { GetServerSideProps, GetStaticProps } from "next";
 import Link from "next/link";
 import PageContainer from "@components/template/PageContainer";
 import Title from "@components/atoms/Title";
@@ -98,7 +98,7 @@ export default function Home({ posts }) {
   );
 }
 
-export const getStaticProps: GetStaticProps = async (context) => {
+export const getServerSideProps: GetServerSideProps = async (context) => {
   const res = await PostsService.fetchEntries();
 
   return {
