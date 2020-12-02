@@ -1,19 +1,20 @@
+import React, { Fragment, useEffect, useState } from "react";
 import Head from "next/head";
 import PostsService from "@utils/contentfulPosts";
 import { GetServerSideProps } from "next/types";
 import PageContainer from "@components/template/PageContainer";
-import { Fragment, useEffect, useState } from "react";
 import Title from "@components/atoms/Title";
 import Divider from "@components/atoms/Divider";
-import marked from "marked";
+import marked, { Renderer } from "marked";
 import * as prism from "prismjs";
 import { renderToString } from "react-dom/server";
+import TransparentHero from "@components/template/hero/TransparentHero";
 
 export default function PostPage({ post }) {
   useEffect(() => {
     prism.highlightAll();
   }, []);
-  const renderer = {
+  const renderer: Renderer = ({
     heading(text, level) {
       const escapedText = text.toLowerCase().replace(/[^\w]+/g, "-");
       return renderToString(
@@ -27,7 +28,7 @@ export default function PostPage({ post }) {
         </Title>
       );
     },
-  };
+  } as unknown) as Renderer;
   marked.use({ renderer });
   const getParsedBody = {
     __html: marked(post.fields.body, { sanitize: true }),
@@ -40,19 +41,21 @@ export default function PostPage({ post }) {
       </Head>
 
       <main>
+        <TransparentHero
+          title={post.fields.title}
+          subtitle={post.fields.subtitle}
+        />
+
         <PageContainer>
-          <div className="posts">
-            <div className="text-center space-y-4">
-              <Title size={1}>{post.fields.title}</Title>
-              <Divider className="mx-auto" />
-              <Title size={3}>{post.fields.subtitle}</Title>
-            </div>
-            <div id="post-entry" dangerouslySetInnerHTML={getParsedBody} />
-            {post.fields.tags?.map((tag) => (
-              <Fragment key={tag.fields.title}>{tag.fields.title}</Fragment>
-            ))}
-            <pre>{JSON.stringify(post, null, 2)}</pre>
-          </div>
+          <div
+            id="post-entry"
+            className="space-y-2"
+            dangerouslySetInnerHTML={getParsedBody}
+          />
+          {post.fields.tags?.map((tag) => (
+            <Fragment key={tag.fields.title}>{tag.fields.title}</Fragment>
+          ))}
+          <pre>{JSON.stringify(post, null, 2)}</pre>
         </PageContainer>
       </main>
     </>

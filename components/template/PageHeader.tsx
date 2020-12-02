@@ -21,13 +21,11 @@ const PageHeader = () => {
 
   return (
     <>
-      <header className="flex flex justify-between p-4 bg-primary-main">
-        <div className="w-auto flex items-center">
+      <header className="flex flex justify-between p-4 bg-primary-main inverted-dots">
+        <div className="w-auto flex items-center pl-0 hover:pl-4 transition transition-all duration-75">
           <Link href="/">
             <a href="/">
-              <Title size={3} className="text-secondary-main">
-                fmonper1
-              </Title>
+              <Image src="/logo.svg" width={40} height={40} />
             </a>
           </Link>
         </div>
