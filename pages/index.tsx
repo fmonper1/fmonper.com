@@ -100,7 +100,6 @@ export default function Home({ posts }) {
 
 export const getStaticProps: GetStaticProps = async (context) => {
   const res = await PostsService.fetchEntries();
-  console.log(res);
 
   return {
     props: {

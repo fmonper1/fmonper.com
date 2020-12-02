@@ -2,7 +2,7 @@ module.exports = {
   purge: [
     "./components/**/*.{js,ts,jsx,tsx}",
     "./pages/**/*.{js,ts,jsx,tsx}",
-    "./resources/**/*.scss",
+    "./resources/**/*.{scss}",
   ],
   darkMode: "media", // 'media' or 'class'
   theme: {
