@@ -25,7 +25,7 @@ const PageHeader = () => {
         <div className="w-auto flex items-center pl-0 hover:pl-4 transition transition-all duration-75">
           <Link href="/">
             <a href="/">
-              <Image src="/logo.svg" width={40} height={40} />
+              <img src="/logo.svg" width={40} height={40} />
             </a>
           </Link>
         </div>
