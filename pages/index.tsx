@@ -1,12 +1,10 @@
 import Head from "next/head";
 import PostsService from "@utils/contentfulPosts";
 import Post from "@components/posts/Post";
-import { GetServerSideProps, GetStaticProps } from "next";
+import { GetServerSideProps } from "next";
 import Link from "next/link";
 import PageContainer from "@components/template/PageContainer";
 import Title from "@components/atoms/Title";
-import Icon from "@mdi/react";
-import { mdiArrowRight } from "@mdi/js";
 import TransparentHero from "@components/template/hero/TransparentHero";
 
 export default function Home({ posts }) {

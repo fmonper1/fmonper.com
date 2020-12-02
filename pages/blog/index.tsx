@@ -1,10 +1,8 @@
 import Head from "next/head";
 import PostsService from "@utils/contentfulPosts";
 import Post from "@components/posts/Post";
-import { GetServerSideProps, GetStaticProps } from "next";
-import Link from "next/link";
+import { GetServerSideProps } from "next";
 import PageContainer from "@components/template/PageContainer";
-import Title from "@components/atoms/Title";
 import TransparentHero from "@components/template/hero/TransparentHero";
 
 export default function Blog({ posts }) {
