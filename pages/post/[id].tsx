@@ -2,20 +2,31 @@ import Head from "next/head";
 import PostsService from "@utils/contentfulPosts";
 import { GetServerSideProps } from "next/types";
 import PageContainer from "@components/template/PageContainer";
-import { useEffect } from "react";
-import { documentToHtmlString } from "@contentful/rich-text-html-renderer";
+import { Fragment, useEffect } from "react";
 import Title from "@components/atoms/Title";
 import Divider from "@components/atoms/Divider";
 import marked from "marked";
+import * as prism from "prismjs";
 
 export default function PostPage({ post }) {
-  const parsedBody = documentToHtmlString(post.fields.body);
-  const getParsedBody = () => {
-    const rawMarkup = marked(post.fields.body, { sanitize: true });
-    return { __html: rawMarkup };
+  useEffect(() => {
+    prism.highlightAll();
+  }, []);
+  marked.setOptions({
+    // highlight: function (code, lang) {
+    //   if (prism.languages[lang]) {
+    //     return prism.highlight(code, prism.languages[lang], lang);
+    //   } else {
+    //     return code;
+    //   }
+    // },
+  });
+
+  const getParsedBody = {
+    __html: marked(post.fields.body, { sanitize: true }),
   };
   return (
-    <div className="container">
+    <>
       <Head>
         <title>Next + Contentful Starter</title>
         <link rel="icon" href="/favicon.ico" />
@@ -29,15 +40,15 @@ export default function PostPage({ post }) {
               <Divider className="mx-auto" />
               <Title size={3}>{post.fields.subtitle}</Title>
             </div>
-            <div dangerouslySetInnerHTML={getParsedBody()} />
+            <div dangerouslySetInnerHTML={getParsedBody} />
             {post.fields.tags.map((tag) => (
-              <>{tag.fields.title}</>
+              <Fragment key={tag.fields.title}>{tag.fields.title}</Fragment>
             ))}
             <pre>{JSON.stringify(post, null, 2)}</pre>
           </div>
         </PageContainer>
       </main>
-    </div>
+    </>
   );
 }
 
