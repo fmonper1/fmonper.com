@@ -1,18 +1,18 @@
-import React from 'react'
-import PageContainer from './PageContainer'
-import Title from '../atoms/Title'
-import Divider from '../atoms/Divider'
-import Link from 'next/link'
-import Image from 'next/image'
+import React from "react";
+import PageContainer from "./PageContainer";
+import Title from "../atoms/Title";
+import Divider from "../atoms/Divider";
+import Link from "next/link";
+import Image from "next/image";
 
 const Footer = () => {
   const enlacesDeInteres = [
-    ['Aviso Legal', '/aviso-legal'],
-    ['Politica de privacidad', '/politica-de-privacidad'],
-    ['Politica de cookies', '/politica-de-cookies'],
-    ['Contacto', '/contacto'],
-  ]
-  const columnStyle = `w-full md:w-1/3 space-y-2`
+    ["Aviso Legal", "/aviso-legal"],
+    ["Politica de privacidad", "/politica-de-privacidad"],
+    ["Politica de cookies", "/politica-de-cookies"],
+    ["Contacto", "/contacto"],
+  ];
+  const columnStyle = `w-full md:w-1/3 space-y-2`;
   return (
     <footer className=" bg-gray-900 text-white">
       <PageContainer>
@@ -21,7 +21,6 @@ const Footer = () => {
             <Image
               src="/logo.svg"
               alt="TraspasaTuCoche.com - Traspasos de vehiculos online"
-              style={{ float: 'left', cursor: 'pointer' }}
               width={275}
               height={30}
             />
@@ -37,7 +36,7 @@ const Footer = () => {
             <Divider />
             <ul className="list-none space-y-1">
               {enlacesDeInteres.map((item, i) => (
-                <li key={'list' + i}>
+                <li key={"list" + i}>
                   <Link href={item[1]}>
                     <a href={item[1]}>{item[0]}</a>
                   </Link>
@@ -53,7 +52,7 @@ const Footer = () => {
         </div>
       </PageContainer>
     </footer>
-  )
-}
+  );
+};
 
-export default Footer
+export default Footer;
