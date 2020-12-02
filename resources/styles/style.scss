@@ -2,13 +2,21 @@
 @import "~tailwindcss/components";
 @import "~tailwindcss/utilities";
 
+@import "fonts";
 @import "prism-darcula";
-
 body {
   background: #ffffff;
   background-image: radial-gradient(rgba(0, 0, 255, 0.3) 1px, transparent 0);
   background-size: 38px 38px;
+  font-family: "OpenSans", Arial, sans-serif;
 }
+
+h1,
+h2,
+h3 {
+  font-family: "SourceSans";
+}
+
 .inverted-dots {
   background-image: radial-gradient(
     rgba(255, 255, 255, 0.5) 1px,
