@@ -10,7 +10,9 @@ const client = require("contentful").createClient({
 
 const PostsService = {
   async fetchEntries(): Promise<EntryCollection<any>> {
-    const entries = await client.getEntries("post");
+    const entries = await client.getEntries({
+      content_type: "post",
+    });
     if (entries.items) return entries.items;
   },
 

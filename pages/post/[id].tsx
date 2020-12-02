@@ -1,12 +1,19 @@
 import Head from "next/head";
-
 import PostsService from "@utils/contentfulPosts";
-
-import Header from "@components/Header";
-import Footer from "@components/Footer";
-import { GetServerSideProps } from "next";
+import { GetServerSideProps } from "next/types";
+import PageContainer from "@components/template/PageContainer";
+import { useEffect } from "react";
+import { documentToHtmlString } from "@contentful/rich-text-html-renderer";
+import Title from "@components/atoms/Title";
+import Divider from "@components/atoms/Divider";
+import marked from "marked";
 
 export default function PostPage({ post }) {
+  const parsedBody = documentToHtmlString(post.fields.body);
+  const getParsedBody = () => {
+    const rawMarkup = marked(post.fields.body, { sanitize: true });
+    return { __html: rawMarkup };
+  };
   return (
     <div className="container">
       <Head>
@@ -15,51 +22,21 @@ export default function PostPage({ post }) {
       </Head>
 
       <main>
-        <Header />
-        <div className="posts">
-          <pre>{JSON.stringify(post, null, 2)}</pre>
-        </div>
+        <PageContainer>
+          <div className="posts">
+            <div className="text-center space-y-4">
+              <Title size={1}>{post.fields.title}</Title>
+              <Divider className="mx-auto" />
+              <Title size={3}>{post.fields.subtitle}</Title>
+            </div>
+            <div dangerouslySetInnerHTML={getParsedBody()} />
+            {post.fields.tags.map((tag) => (
+              <>{tag.fields.title}</>
+            ))}
+            <pre>{JSON.stringify(post, null, 2)}</pre>
+          </div>
+        </PageContainer>
       </main>
-
-      <Footer />
-
-      <style jsx>{`
-        .container {
-          height: 100vh;
-          display: flex;
-          flex-direction: column;
-          justify-content: center;
-          align-items: center;
-        }
-
-        main {
-          padding: 5rem 0;
-          flex: 1;
-          display: flex;
-          flex-direction: column;
-          justify-content: center;
-          align-items: center;
-        }
-
-        .posts {
-          display: flex;
-        }
-      `}</style>
-
-      <style jsx global>{`
-        html,
-        body {
-          padding: 0;
-          margin: 0;
-          font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
-            Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue,
-            sans-serif;
-        }
-
-        * {
-          box-sizing: border-box;
-        }
-      `}</style>
     </div>
   );
 }
