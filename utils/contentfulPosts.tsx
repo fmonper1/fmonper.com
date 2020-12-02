@@ -1,4 +1,4 @@
-import { Entry, EntryCollection } from "contentful";
+import Contentful, { Entry, EntryCollection } from "contentful";
 
 const space = process.env.NEXT_PUBLIC_CONTENTFUL_SPACE_ID;
 const accessToken = process.env.NEXT_PUBLIC_CONTENTFUL_ACCESS_TOKEN;
@@ -6,7 +6,7 @@ const accessToken = process.env.NEXT_PUBLIC_CONTENTFUL_ACCESS_TOKEN;
 /*
  * https://contentful.github.io/contentful.js/contentful/7.15.1/
  */
-const client = require("contentful").createClient({
+const client = Contentful.createClient({
   space: space,
   accessToken: accessToken,
 });

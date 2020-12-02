@@ -41,5 +41,4 @@ module.exports = {
     padding: ["responsive", "first", "hover", "focus", "last"],
     display: ["responsive", "hover", "focus", "group-hover"],
   },
-  plugins: [],
 };
