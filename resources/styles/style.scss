@@ -1,5 +1,36 @@
-@import '~tailwindcss/base';
-@import '~tailwindcss/components';
-@import '~tailwindcss/utilities';
+@import "~tailwindcss/base";
+@import "~tailwindcss/components";
+@import "~tailwindcss/utilities";
 
 @import "prism-darcula";
+
+#post-entry {
+  h2,
+  h3 {
+    display: flex;
+    &:after {
+      content: " ";
+      height: 3px;
+      position: relative;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      right: 0;
+      width: auto;
+      flex-grow: 1;
+      background: linear-gradient(90deg, #7f5af0 0, #d53a9d);
+      margin: 0.75em 2px 0 5px;
+      border-radius: 2px;
+    }
+  }
+  p {
+    &:first-child {
+      padding-left: 0.8em;
+      border-left: 4px solid;
+      @apply border-secondary-main;
+    }
+  }
+  img {
+    margin: 0 auto;
+  }
+}

@@ -1,36 +1,33 @@
-import * as React from 'react'
-import Link from 'next/link'
-import Navbar from './Navbar'
-import Icon from '@mdi/react'
-import { mdiMenu } from '@mdi/js'
-import { useEffect, useState } from 'react'
-import { useRouter } from 'next/router'
-import MobileNavbar from './MovileNavbar'
-import Image from 'next/image'
+import * as React from "react";
+import Link from "next/link";
+import Navbar from "./Navbar";
+import Icon from "@mdi/react";
+import { mdiMenu } from "@mdi/js";
+import { useEffect, useState } from "react";
+import { useRouter } from "next/router";
+import MobileNavbar from "./MovileNavbar";
+import Image from "next/image";
+import Title from "@components/atoms/Title";
 
 const PageHeader = () => {
-  const [show, setShow] = useState(false)
-  const { route } = useRouter()
+  const [show, setShow] = useState(false);
+  const { route } = useRouter();
 
   useEffect(() => {
-    setShow(false)
-  }, [route])
+    setShow(false);
+  }, [route]);
 
-  const toggleNavbar = () => setShow(!show)
+  const toggleNavbar = () => setShow(!show);
 
   return (
     <>
       <header className="flex flex justify-between p-4 bg-primary-main">
-        <div className="w-auto">
+        <div className="w-auto flex items-center">
           <Link href="/">
             <a href="/">
-              <Image
-                width={337}
-                height={36}
-                src="/logo.png"
-                alt="TraspasaTuCoche.com - Traspasos de vehiculos online"
-                style={{ float: 'left', cursor: 'pointer' }}
-              />
+              <Title size={3} className="text-secondary-main">
+                fmonper1
+              </Title>
             </a>
           </Link>
         </div>
@@ -56,14 +53,14 @@ const PageHeader = () => {
         >
           <div
             className={`block sm:hidden w-full sm:w-1/2 flex content-start absolute h-screen z-20 bg-primary-main right-0`}
-            style={{ maxWidth: '70%', maxHeight: 'calc(100vh)' }}
+            style={{ maxWidth: "70%", maxHeight: "calc(100vh)" }}
           >
             <MobileNavbar toggleNavbar={toggleNavbar} />
           </div>
         </div>
       )}
     </>
-  )
-}
+  );
+};
 
-export default PageHeader
+export default PageHeader;

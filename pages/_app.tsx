@@ -10,7 +10,9 @@ export default class MyApp extends App {
     return (
       <>
         <PageHeader />
-        <Component {...pageProps} />
+        <div className="w-full">
+          <Component {...pageProps} />
+        </div>
       </>
     );
   }

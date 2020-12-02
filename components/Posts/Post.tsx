@@ -5,8 +5,8 @@ function Post({ entry, date, image, title }) {
 
   return (
     <div className="post shadow-md">
-      <Link href={`post/${entry.sys.id}`}>
-        <a href={`post/${entry.sys.id}`}>
+      <Link href={`post/${entry.fields.slug}`}>
+        <a href={`post/${entry.fields.slug}`}>
           <img alt={description} src={`https:${file.url}`} />
           <div className="description">{description}</div>
           <div className="text">
@@ -15,7 +15,6 @@ function Post({ entry, date, image, title }) {
           </div>
         </a>
       </Link>
-
       <style jsx>{`
         .post {
           position: relative;
