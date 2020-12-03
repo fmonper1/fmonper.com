@@ -24,7 +24,6 @@ export default function Blog({ posts }) {
               <Post
                 entry={entry}
                 key={entry.sys.id}
-                date={p.date}
                 image={p.image?.fields}
                 title={p.title}
               />
