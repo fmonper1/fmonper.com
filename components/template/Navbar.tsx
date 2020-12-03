@@ -1,15 +1,8 @@
-import React, { useContext } from "react";
+import React from "react";
 import Link from "next/link";
 import { useTranslation } from "react-i18next";
 import Icon from "@mdi/react";
-import {
-  mdiArrowRight,
-  mdiBlogger,
-  mdiHelpCircle,
-  mdiHome,
-  mdiLogout,
-} from "@mdi/js";
-import LanguageSelector from "./LanguageSelector";
+import { mdiBlogger, mdiHome } from "@mdi/js";
 
 interface LinkProps {
   href: string;
@@ -29,7 +22,6 @@ const MyLink = ({ href, children, className, ...props }: LinkProps) => (
   </Link>
 );
 const Navbar = () => {
-  const { t } = useTranslation("common");
   return (
     <div className="flex flex-col sm:flex-row items-center justify-end space-y-2 sm:space-y-0 sm:space-x-2">
       <MyLink href="/">

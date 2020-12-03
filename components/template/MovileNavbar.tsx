@@ -1,16 +1,8 @@
-import React, { useContext, useEffect } from "react";
+import React, { useEffect } from "react";
 import Link from "next/link";
 import { useTranslation } from "react-i18next";
 import Icon from "@mdi/react";
-import {
-  mdiAccount,
-  mdiArrowRight,
-  mdiClose,
-  mdiHelpCircle,
-  mdiHome,
-  mdiLock,
-  mdiLogout,
-} from "@mdi/js";
+import { mdiBlogger, mdiClose, mdiHome } from "@mdi/js";
 import Button from "../atoms/Button";
 
 interface Props {
@@ -41,7 +33,6 @@ const MobileNavbar = ({ toggleNavbar }: Props) => {
     document.body.style.overflow = "hidden";
     return () => (document.body.style.overflow = "unset");
   }, []);
-  const { t } = useTranslation("common");
   return (
     <div className="w-full flex flex-col space-y-4 p-4">
       <div className="flex justify-end" style={{ height: 40 }}>
@@ -54,31 +45,11 @@ const MobileNavbar = ({ toggleNavbar }: Props) => {
       {/*  <LanguageSelector />*/}
       {/*</div>*/}
 
-      <MyLink href="/preguntas-frecuentes">
-        <Icon path={mdiHome} size={1} className="mr-4" />
-        {t("navbar.home")}
-      </MyLink>
-
       <MyLink href="/">
-        <Icon path={mdiHelpCircle} size={1} className="mr-4" />
-        {t("navbar.faq")}
+        <Icon path={mdiHome} size={1} /> Home
       </MyLink>
-
-      <MyLink
-        href="/transferir-vehiculo"
-        className="bg-secondary-main hover:bg-secondary-light"
-      >
-        {t("navbar.transfer")}
-        <Icon path={mdiArrowRight} size={1} />
-      </MyLink>
-
-      <MyLink
-        href="#"
-        onClick={(e) => e.preventDefault()}
-        className="text-gray-600  cursor-auto"
-      >
-        <Icon path={mdiLock} size={1} className="mr-4" />
-        {t("navbar.informeDGT")}
+      <MyLink href="/blog">
+        <Icon path={mdiBlogger} size={1} /> Blog
       </MyLink>
     </div>
   );
