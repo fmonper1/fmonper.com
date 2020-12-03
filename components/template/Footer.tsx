@@ -4,6 +4,8 @@ import Title from "../atoms/Title";
 import Divider from "../atoms/Divider";
 import Link from "next/link";
 import Image from "next/image";
+import Icon from "@mdi/react";
+import { mdiGithub } from "@mdi/js";
 
 const Footer = () => {
   const enlacesDeInteres = [
@@ -12,42 +14,22 @@ const Footer = () => {
     ["Politica de cookies", "/politica-de-cookies"],
     ["Contacto", "/contacto"],
   ];
-  const columnStyle = `w-full md:w-1/3 space-y-2`;
+  const columnStyle = `w-full space-y-2 flex justify-center`;
   return (
-    <footer className=" bg-gray-900 text-white">
+    <footer className="bg-primary-main inverted-dots text-white">
       <PageContainer>
-        <div className="flex flex-wrap">
+        <div className="flex flex-wrap space-y-8 my-4">
           <div className={columnStyle}>
-            <Image
-              src="/logo.svg"
-              alt="TraspasaTuCoche.com - Traspasos de vehiculos online"
-              width={275}
-              height={30}
-            />
-            <Title size={3} color="text-white">
-              Links
-            </Title>
-            <Divider />
+            <img src="/logo.svg" alt="fmonper" width={80} />
           </div>
+
           <div className={columnStyle}>
-            <Title size={3} color="text-white">
-              Enlaces de interes
-            </Title>
-            <Divider />
-            <ul className="list-none space-y-1">
-              {enlacesDeInteres.map((item, i) => (
-                <li key={"list" + i}>
-                  <Link href={item[1]}>
-                    <a href={item[1]}>{item[0]}</a>
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-          <div className={columnStyle}>
-            <a href="https://stories.freepik.com/home">
-              Illustration by Freepik Stories
-            </a>
+            <div className="flex">
+              Built with NextJS + Contentful -{" "}
+              <span className="inline-flex">
+                <Icon path={mdiGithub} size={1} /> Repo
+              </span>
+            </div>
           </div>
         </div>
       </PageContainer>

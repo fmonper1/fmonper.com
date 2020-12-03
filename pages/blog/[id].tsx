@@ -1,10 +1,11 @@
-import React, { Fragment, useEffect, useState } from "react";
+import React from "react";
 import Head from "next/head";
 import PostsService from "@utils/contentfulPosts";
 import { GetServerSideProps } from "next/types";
 import PageContainer from "@components/template/PageContainer";
 import TransparentHero from "@components/template/hero/TransparentHero";
 import useMarkdown from "../../hooks/useMarkdown";
+import Button from "@components/atoms/Button";
 
 export default function PostPage({ post }) {
   const html = useMarkdown(post.fields.body);
@@ -21,7 +22,7 @@ export default function PostPage({ post }) {
           subtitle={post.fields.subtitle}
         />
 
-        <PageContainer>
+        <PageContainer className="my-8">
           <div
             id="post-entry"
             className="space-y-2"
@@ -29,10 +30,13 @@ export default function PostPage({ post }) {
               __html: html,
             }}
           />
-          {post.fields.tags?.map((tag) => (
-            <Fragment key={tag.fields.title}>{tag.fields.title}</Fragment>
-          ))}
-          <pre>{JSON.stringify(post, null, 2)}</pre>
+          <div className="flex space-x-2 mt-8">
+            <div className="p-2 text-primary-main">Tags:</div>
+            {post.fields.tags?.map((tag) => (
+              <Button key={tag.fields.title}>{tag.fields.title}</Button>
+            ))}
+          </div>
+          {/*<pre>{JSON.stringify(post, null, 2)}</pre>*/}
         </PageContainer>
       </main>
     </>

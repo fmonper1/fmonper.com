@@ -34,7 +34,7 @@ function Post({ entry, image, title }) {
               </div>
               <Divider />
               <div className="description">
-                <p>{String(entry.fields.excerpt).slice(0, 150).trim()}...</p>
+                <p>{String(entry.fields.excerpt).slice(0, 200).trim()}...</p>
               </div>
             </div>
           </div>

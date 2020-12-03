@@ -1,13 +1,14 @@
-import React from 'react'
-import Title from '../atoms/Title'
-import Divider from '../atoms/Divider'
+import React from "react";
+import Title from "../atoms/Title";
+import Divider from "../atoms/Divider";
 
 interface Props {
-  title?
-  children
-  extra?
-  withDivider?: boolean
-  [props: string]: any
+  title?;
+  children;
+  extra?;
+  withDivider?: boolean;
+  className?: string;
+  [props: string]: any;
 }
 
 const Card = ({
@@ -15,10 +16,13 @@ const Card = ({
   children,
   extra,
   withDivider = false,
+  className,
   ...props
 }: Props) => {
   return (
-    <div className="bg-white rounded-md p-4 transition duration-200 shadow-lg hover:shadow-xl  border-1 w-full space-y-4">
+    <div
+      className={`bg-white rounded-md p-4 transition duration-200 shadow-lg hover:shadow-xl  border-1 w-full space-y-4 ${className}`}
+    >
       {(title || extra) && (
         <div className="flex flex-wrap">
           <Title size={2} className="flex-grow">
@@ -29,9 +33,9 @@ const Card = ({
       )}
       {withDivider && <Divider />}
 
-      <div>{children}</div>
+      <>{children}</>
     </div>
-  )
-}
+  );
+};
 
-export default Card
+export default Card;
