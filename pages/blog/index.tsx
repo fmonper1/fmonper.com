@@ -9,8 +9,7 @@ export default function Blog({ posts }) {
   return (
     <>
       <Head>
-        <title>Next + Contentful Starter</title>
-        <link rel="icon" href="/favicon.ico" />
+        <title>Blog | fmonper</title>
       </Head>
 
       <TransparentHero

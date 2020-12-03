@@ -5,7 +5,7 @@
 @import "fonts";
 @import "prism-darcula";
 body {
-  background: #ffffff;
+  background: #f5f5f5;
   background-image: radial-gradient(rgba(0, 0, 255, 0.3) 1px, transparent 0);
   background-size: 38px 38px;
   font-family: "OpenSans", Arial, sans-serif;
@@ -26,6 +26,7 @@ h3 {
 }
 
 #post-entry {
+  h1,
   h2,
   h3 {
     display: flex;
@@ -68,7 +69,6 @@ h3 {
 .underline-link {
   position: relative;
   text-decoration: none;
-  color: purple;
 
   &:after {
     content: "";
@@ -88,4 +88,6 @@ h3 {
       transform: scaleX(0);
     }
   }
+
+  @apply text-primary-main hover:text-primary-light;
 }

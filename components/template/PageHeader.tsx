@@ -6,8 +6,6 @@ import { mdiMenu } from "@mdi/js";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import MobileNavbar from "./MovileNavbar";
-import Image from "next/image";
-import Title from "@components/atoms/Title";
 
 const PageHeader = () => {
   const [show, setShow] = useState(false);
@@ -22,10 +20,15 @@ const PageHeader = () => {
   return (
     <>
       <header className="flex flex justify-between p-4 bg-primary-main inverted-dots">
-        <div className="w-auto flex items-center pl-0 hover:pl-4 transition transition-all duration-75">
+        <div className="w-auto flex items-center pl-0 ">
           <Link href="/">
             <a href="/">
-              <img src="/logo.svg" width={40} height={40} />
+              <img
+                src="/logo.svg"
+                width={40}
+                height={40}
+                className="hover:animate-bounce "
+              />
             </a>
           </Link>
         </div>

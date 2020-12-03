@@ -1,10 +1,10 @@
 import Link from "next/link";
-import Image from "next/image";
 import Title from "@components/atoms/Title";
 import Card from "@components/cards/Card";
-import React, { Fragment } from "react";
+import React from "react";
+import Divider from "@components/atoms/Divider";
 
-function Post({ entry, date, image, title }) {
+function Post({ entry, image, title }) {
   let { file, description } = image;
   const tag = entry.fields.tags[0];
 
@@ -25,13 +25,14 @@ function Post({ entry, date, image, title }) {
                 />
               </div>
             </div>
-            <div className="flex flex-col">
+            <div className="flex flex-col space-y-2">
               <div>
                 <div className="text-sm uppercase" key={tag.fields.title}>
                   {tag.fields.title}
                 </div>
                 <Title size={2}>{title}</Title>
               </div>
+              <Divider />
               <div className="description">
                 <p>{String(entry.fields.excerpt).slice(0, 150).trim()}...</p>
               </div>

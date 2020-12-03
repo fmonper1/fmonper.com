@@ -6,13 +6,15 @@ import Link from "next/link";
 import PageContainer from "@components/template/PageContainer";
 import Title from "@components/atoms/Title";
 import TransparentHero from "@components/template/hero/TransparentHero";
+import Button from "@components/atoms/Button";
+import Icon from "@mdi/react";
+import { mdiGithub, mdiLinkedin } from "@mdi/js";
 
 export default function Home({ posts }) {
   return (
     <>
       <Head>
-        <title>Next + Contentful Starter</title>
-        <link rel="icon" href="/favicon.ico" />
+        <title>Inicio | fmonper</title>
       </Head>
 
       <TransparentHero>
@@ -24,6 +26,14 @@ export default function Home({ posts }) {
           I'm a <span className="text-secondary-main">software engineer</span>{" "}
           and <span className="text-secondary-main">full-stack</span> developer.
         </Title>
+        <div className="mb-8 flex">
+          <Button className="flex mr-4">
+            <Icon path={mdiLinkedin} size={1} className="mr-2" /> LinkedIn
+          </Button>
+          <Button style="link" className="flex">
+            <Icon path={mdiGithub} size={1} className="mr-2" /> Github
+          </Button>
+        </div>
       </TransparentHero>
       <PageContainer>
         <div className="flex justify-center text-center py-8">
@@ -70,9 +80,12 @@ export default function Home({ posts }) {
         </div>
       </PageContainer>
       <PageContainer>
-        <Title size={2}>
+        <Title size={2} className="mb-4">
           <Link href="/blog">
-            <a href="/blog" className="underline-link">
+            <a
+              href="/blog"
+              className=" text-primary-main hover:text-background-light underline-link"
+            >
               From the blog »
             </a>
           </Link>
