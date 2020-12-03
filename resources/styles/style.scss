@@ -19,7 +19,7 @@ h3 {
 
 .inverted-dots {
   background-image: radial-gradient(
-    rgba(255, 255, 255, 0.5) 1px,
+    rgba(255, 255, 255, 0.2) 1px,
     transparent 0
   );
   background-size: 38px 38px;
@@ -27,7 +27,24 @@ h3 {
 
 #post-entry {
   h1,
-  h2,
+  h2 {
+    display: flex;
+    &:after {
+      content: " ";
+      height: 3px;
+      position: relative;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      right: 0;
+      width: auto;
+      flex-grow: 1;
+      //background: linear-gradient(90deg, #7f5af0 0, #d53a9d);
+      margin: 0.75em 2px 0 5px;
+      border-radius: 2px;
+      @apply bg-gradient-to-r from-primary-main to-primary-light;
+    }
+  }
   h3 {
     display: flex;
     &:after {
@@ -43,7 +60,7 @@ h3 {
       //background: linear-gradient(90deg, #7f5af0 0, #d53a9d);
       margin: 0.75em 2px 0 5px;
       border-radius: 2px;
-      @apply bg-gradient-to-r from-primary-main to-secondary-main;
+      @apply bg-gradient-to-r from-secondary-main to-secondary-light;
     }
   }
   p {
