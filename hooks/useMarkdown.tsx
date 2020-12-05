@@ -28,7 +28,7 @@ const useMarkdown = (markdown: string) => {
       heading(text, level) {
         const escapedText = text.toLowerCase().replace(/[^\w]+/g, "-");
         return renderToString(
-          <Title size={level}>
+          <Title size={level} className={level <= 2 ? "pt-3" : ""}>
             <>
               <a className="anchor" href={`#${escapedText}`}>
                 <span className="mr-2">#</span>

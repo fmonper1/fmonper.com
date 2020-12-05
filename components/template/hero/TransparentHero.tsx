@@ -1,7 +1,7 @@
 import PageContainer from "@components/template/PageContainer";
 import Title from "@components/atoms/Title";
 import Divider from "@components/atoms/Divider";
-import React, { ReactChild } from "react";
+import React from "react";
 
 type Props = {
   title?: string;
@@ -12,7 +12,7 @@ const TransparentHero = ({ title, subtitle, children }: Props) => {
   return (
     <div className="bg-primary-main">
       <div className="inverted-dots ">
-        <PageContainer>
+        <PageContainer className=" py-8 md:py-12">
           {children ? (
             children
           ) : (

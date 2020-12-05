@@ -1,5 +1,5 @@
 import Head from "next/head";
-import PostsService from "@utils/contentfulPosts";
+import PostsService from "@utils/posts.service";
 import Post from "@components/posts/Post";
 import { GetServerSideProps } from "next";
 import PageContainer from "@components/template/PageContainer";

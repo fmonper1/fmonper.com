@@ -9,13 +9,13 @@ export default class MyApp extends App {
     // @ts-ignore
     const { Component, pageProps } = this.props;
     return (
-      <>
+      <div className="flex flex-col min-h-screen">
         <PageHeader />
-        <div className="w-full">
+        <div className="w-full flex-grow">
           <Component {...pageProps} />
         </div>
         <Footer />
-      </>
+      </div>
     );
   }
 }

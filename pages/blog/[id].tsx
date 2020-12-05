@@ -1,6 +1,6 @@
 import React from "react";
 import Head from "next/head";
-import PostsService from "@utils/contentfulPosts";
+import PostsService from "@utils/posts.service";
 import { GetServerSideProps } from "next/types";
 import PageContainer from "@components/template/PageContainer";
 import TransparentHero from "@components/template/hero/TransparentHero";
@@ -25,7 +25,7 @@ export default function PostPage({ post }) {
         <PageContainer className="my-8">
           <div
             id="post-entry"
-            className="space-y-2"
+            className="space-y-3 md:text-lg"
             dangerouslySetInnerHTML={{
               __html: html,
             }}

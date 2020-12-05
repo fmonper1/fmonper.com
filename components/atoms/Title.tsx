@@ -32,7 +32,7 @@ const Title = ({ size, className, children, color, ...props }: Props) => {
     case 3:
       return (
         <h3
-          className={`text-xl md:text-2xl ${className} ${baseCss}`}
+          className={`text-xl md:text-2xl font-bold ${className} ${baseCss}`}
           {...props}
         >
           {children}
