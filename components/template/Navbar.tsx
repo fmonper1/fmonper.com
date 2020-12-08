@@ -1,8 +1,7 @@
 import React from "react";
 import Link from "next/link";
-import { useTranslation } from "react-i18next";
 import Icon from "@mdi/react";
-import { mdiBlogger, mdiHome } from "@mdi/js";
+import { mdiBlogger, mdiBriefcase, mdiHome } from "@mdi/js";
 
 interface LinkProps {
   href: string;
@@ -29,6 +28,9 @@ const Navbar = () => {
       </MyLink>
       <MyLink href="/blog">
         <Icon path={mdiBlogger} size={1} /> Blog
+      </MyLink>
+      <MyLink href="/projects">
+        <Icon path={mdiBriefcase} size={1} /> Projects
       </MyLink>
       {/*<MyLink*/}
       {/*  href="/transferir-vehiculo"*/}

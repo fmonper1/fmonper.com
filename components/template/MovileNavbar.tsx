@@ -1,8 +1,7 @@
 import React, { useEffect } from "react";
 import Link from "next/link";
-import { useTranslation } from "react-i18next";
 import Icon from "@mdi/react";
-import { mdiBlogger, mdiClose, mdiHome } from "@mdi/js";
+import { mdiBlogger, mdiBriefcase, mdiClose, mdiHome } from "@mdi/js";
 import Button from "../atoms/Button";
 
 interface Props {
@@ -50,6 +49,9 @@ const MobileNavbar = ({ toggleNavbar }: Props) => {
       </MyLink>
       <MyLink href="/blog">
         <Icon path={mdiBlogger} size={1} /> Blog
+      </MyLink>
+      <MyLink href="/projects">
+        <Icon path={mdiBriefcase} size={1} /> Projects
       </MyLink>
     </div>
   );
