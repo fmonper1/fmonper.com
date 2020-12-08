@@ -2,7 +2,6 @@ import Title from "@components/atoms/Title";
 import React from "react";
 
 function PortfolioBannerItem({ entry }) {
-  console.log(entry);
   const { title } = entry.fields;
   const { file } = entry.fields.cover.fields;
 

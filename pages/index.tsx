@@ -12,6 +12,7 @@ import PortfolioService from "@utils/portfolio.service";
 import PostList from "@components/sections/index/PostList";
 import CardSection from "@components/sections/index/CardSection";
 import PortfolioList from "@components/sections/index/PortfoliotList";
+import Slider from "@components/atoms/Slider";
 
 export default function Home({ posts, portfolio }) {
   return (

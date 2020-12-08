@@ -4,6 +4,8 @@
 
 @import "fonts";
 @import "prism-darcula";
+@import "slider";
+
 body {
   background: #f5f5f5;
   background-image: radial-gradient(rgba(0, 0, 255, 0.3) 1px, transparent 0);
@@ -64,7 +66,6 @@ h3 {
     //}
   }
   p {
-    font-size: 20px;
     &:first-child {
       padding-left: 0.8em;
       border-left: 4px solid;

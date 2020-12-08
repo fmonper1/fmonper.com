@@ -37,7 +37,6 @@ export default function Blog({ posts }) {
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const res = await PostsService.fetchEntries();
-  console.log(res);
 
   return {
     props: {
