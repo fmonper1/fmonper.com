@@ -51,7 +51,7 @@ const useMarkdown = (markdown: string) => {
           </div>
         );
       },
-    };
+    } as Partial<Renderer>;
     marked.use({ renderer });
     setHtml(DOMPurify.sanitize(marked(markdown)));
   }, []);
