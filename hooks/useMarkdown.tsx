@@ -12,7 +12,7 @@ const useMarkdown = (markdown: string) => {
   const [html, setHtml] = useState("");
 
   useEffect(() => {
-    const renderer: Partial<Renderer> = {
+    const renderer: Renderer = {
       link(href, title, text) {
         return renderToString(
           <Link href={href}>
@@ -51,7 +51,7 @@ const useMarkdown = (markdown: string) => {
           </div>
         );
       },
-    };
+    } as unknown as Renderer;
     marked.use({ renderer });
     setHtml(DOMPurify.sanitize(marked(markdown)));
   }, []);
