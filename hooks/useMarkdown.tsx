@@ -42,10 +42,10 @@ const useMarkdown = (markdown: string) => {
       code(code, language) {
         return renderToString(
           <div>
-            <div className="codeblock-lang text-sm font-bold p-2 px-4 bg-secondary-main -mb-2 flex">
+            <div className="codeblock-lang text-sm font-bold p-2 px-4 bg-secondary-main -mb-0 flex">
               {language}
             </div>
-            <pre className={`language-${language}`}>
+            <pre className={`language-${language} mt-0`}>
               <code className={`language-${language}`}>{code}</code>
             </pre>
           </div>
