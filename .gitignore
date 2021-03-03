@@ -3,6 +3,8 @@
 .env.*
 
 .next
+out_functions
+out_publish
 
 # dependencies
 /node_modules
