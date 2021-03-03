@@ -9,18 +9,17 @@ import Button from "@components/atoms/Button";
 import Title from "@components/atoms/Title";
 
 export default function PostPage({ post }) {
-  const html = useMarkdown(post.fields.body);
-
+  const html = useMarkdown(post?.fields.body);
   return (
     <>
       <Head>
-        <title>{post.fields.title} | fmonper</title>
+        <title>{post?.fields.title} | fmonper</title>
       </Head>
 
       <main>
         <TransparentHero
-          title={post.fields.title}
-          subtitle={post.fields.subtitle}
+          title={post?.fields.title}
+          subtitle={post?.fields.subtitle}
         />
 
         <PageContainer className="my-8">
@@ -34,7 +33,7 @@ export default function PostPage({ post }) {
           <div className="mt-8">
             <Title size={3}>Tags</Title>
             <div className="flex space-x-2 flex-wrap ">
-              {post.fields.tags?.map((tag) => (
+              {post?.fields.tags?.map((tag) => (
                 <Button key={tag.fields.title} className="my-2">
                   {tag.fields.title}
                 </Button>
@@ -59,10 +58,10 @@ export const getStaticProps: GetStaticProps = async (context) => {
 };
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const entries = await PostsService.fetchEntries();
+  const entries: any[] = await PostsService.fetchEntries();
 
   return {
-    paths: entries.map(({ fields }) => `/blog/${fields.slug}`) ?? [],
+    paths: entries?.map(({ fields }) => `/blog/${fields.slug}`) ?? [],
     fallback: true,
   };
 };
