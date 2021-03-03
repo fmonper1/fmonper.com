@@ -3,6 +3,7 @@ import Link from "next/link";
 import Icon from "@mdi/react";
 import { mdiBlogger, mdiBriefcase, mdiClose, mdiHome } from "@mdi/js";
 import Button from "../atoms/Button";
+import FadeIn from "@components/atoms/FadeIn";
 
 interface Props {
   toggleNavbar: () => void;
@@ -39,20 +40,21 @@ const MobileNavbar = ({ toggleNavbar }: Props) => {
           <Icon path={mdiClose} size={1} />{" "}
         </Button>
       </div>
+      <FadeIn>
+        {/*<div className="relative">*/}
+        {/*  <LanguageSelector />*/}
+        {/*</div>*/}
 
-      {/*<div className="relative">*/}
-      {/*  <LanguageSelector />*/}
-      {/*</div>*/}
-
-      <MyLink href="/">
-        <Icon path={mdiHome} size={1} /> Home
-      </MyLink>
-      <MyLink href="/blog">
-        <Icon path={mdiBlogger} size={1} /> Blog
-      </MyLink>
-      <MyLink href="/projects">
-        <Icon path={mdiBriefcase} size={1} /> Projects
-      </MyLink>
+        <MyLink href="/">
+          <Icon path={mdiHome} size={1} /> Home
+        </MyLink>
+        <MyLink href="/blog">
+          <Icon path={mdiBlogger} size={1} /> Blog
+        </MyLink>
+        <MyLink href="/projects">
+          <Icon path={mdiBriefcase} size={1} /> Projects
+        </MyLink>
+      </FadeIn>
     </div>
   );
 };

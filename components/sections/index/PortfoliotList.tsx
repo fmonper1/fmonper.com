@@ -38,10 +38,10 @@ const PortfolioList = ({ items }) => {
       </Title>
       <div>
         <Slider>
-          {pagedItems.map((page) => (
-            <div className="flex sm:space-x-4">
-              {page.map((entry) => (
-                <div className="w-full sm:w-1/2 md:w-1/3">
+          {pagedItems.map((page, i) => (
+            <div className="flex sm:space-x-4" key={i}>
+              {page.map((entry, i) => (
+                <div className="w-full sm:w-1/2 md:w-1/3" key={i}>
                   <PortfolioBannerItem entry={entry} />
                 </div>
               ))}

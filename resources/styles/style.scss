@@ -19,6 +19,20 @@ h3 {
   font-family: "SourceSans", Arial, serif;
 }
 
+.fade-in-section {
+  opacity: 0;
+  transform: translateY(10vh);
+  visibility: hidden;
+  transition: opacity 0.4s ease-out, transform 0.8s ease-out;
+  will-change: opacity, visibility;
+
+  &.is-visible {
+    opacity: 1;
+    transform: none;
+    visibility: visible;
+  }
+}
+
 .inverted-dots {
   background-image: radial-gradient(
     rgba(255, 255, 255, 0.2) 1px,
