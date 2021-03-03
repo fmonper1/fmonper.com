@@ -10,17 +10,21 @@ module.exports = {
     extend: {
       colors: {
         primary: {
+          DEFAULT: "#14213d",
           main: "#14213d",
           light: "#1b2e55",
         },
         secondary: {
+          DEFAULT: "#fca311",
           main: "#fca311",
           light: "#fcbf49",
         },
         background: {
+          DEFAULT: "#e6e6e6",
           main: "#e6e6e6",
         },
         text: {
+          DEFAULT: "#2d2d2d",
           primary: "#2d2d2d",
           secondary: "#5f5f5f",
         },

@@ -10,8 +10,9 @@ import DOMPurify from "dompurify";
 
 const useMarkdown = (markdown: string) => {
   const [html, setHtml] = useState("");
+
   useEffect(() => {
-    const renderer: Renderer = ({
+    const renderer: Renderer = {
       link(href, title, text) {
         return renderToString(
           <Link href={href}>
@@ -38,7 +39,19 @@ const useMarkdown = (markdown: string) => {
           </Title>
         );
       },
-    } as unknown) as Renderer;
+      code(code, language) {
+        return renderToString(
+          <div className={`codeblock-${language}`}>
+            <div className="codeblock-lang text-sm font-bold p-2 px-4 bg-secondary -mb-2 flex">
+              {language}
+            </div>
+            <pre className={`language-${language}`}>
+              <code className={`language-${language}`}>{code}</code>
+            </pre>
+          </div>
+        );
+      },
+    };
     marked.use({ renderer });
     setHtml(DOMPurify.sanitize(marked(markdown)));
   }, []);

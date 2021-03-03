@@ -1,5 +1,5 @@
 import Head from "next/head";
-import { GetServerSideProps } from "next";
+import { GetStaticProps } from "next";
 import PageContainer from "@components/template/PageContainer";
 import TransparentHero from "@components/template/hero/TransparentHero";
 import PortfolioService from "@utils/portfolio.service";
@@ -29,7 +29,7 @@ export default function Portfolio({ portfolio }) {
   );
 }
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
+export const getStaticProps: GetStaticProps = async () => {
   const portfolio = await PortfolioService.fetchEntries();
 
   return {

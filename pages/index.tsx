@@ -1,6 +1,6 @@
 import Head from "next/head";
 import PostsService from "@utils/posts.service";
-import { GetServerSideProps } from "next";
+import { GetStaticProps } from "next";
 import Link from "next/link";
 import PageContainer from "@components/template/PageContainer";
 import Title from "@components/atoms/Title";
@@ -12,7 +12,6 @@ import PortfolioService from "@utils/portfolio.service";
 import PostList from "@components/sections/index/PostList";
 import CardSection from "@components/sections/index/CardSection";
 import PortfolioList from "@components/sections/index/PortfoliotList";
-import Slider from "@components/atoms/Slider";
 
 export default function Home({ posts, portfolio }) {
   return (
@@ -62,7 +61,7 @@ export default function Home({ posts, portfolio }) {
   );
 }
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
+export const getStaticProps: GetStaticProps = async () => {
   const posts = await PostsService.fetchEntries();
   const portfolio = await PortfolioService.fetchEntries();
 
