@@ -19,6 +19,7 @@
     "babel-plugin-prismjs": "^2.0.1",
     "contentful": "^7.14.6",
     "dompurify": "^2.2.2",
+    "gray-matter": "^4.0.2",
     "marked": "^1.2.5",
     "next": "^10.0.3",
     "next-on-netlify": "^2.6.3",
