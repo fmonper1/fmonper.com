@@ -5,7 +5,6 @@ import Icon from "@mdi/react";
 import { mdiOpenInNew } from "@mdi/js";
 import Title from "@components/atoms/Title";
 import React from "react";
-import DOMPurify from "dompurify";
 
 const MarkdownParser = {
   parse(markdown: string) {
@@ -27,12 +26,10 @@ const MarkdownParser = {
         const escapedText = text.toLowerCase().replace(/[^\w]+/g, "-");
         return renderToString(
           <Title size={level} className={level <= 2 ? "pt-3" : ""}>
-            <>
-              <a className="anchor" href={`#${escapedText}`}>
-                <span className="mr-2">#</span>
-              </a>
+            <a className="anchor" href={`#${escapedText}`}>
+              <span className="mr-2">#</span>
               {text}
-            </>
+            </a>
           </Title>
         );
       },

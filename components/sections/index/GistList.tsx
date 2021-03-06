@@ -2,8 +2,6 @@ import React from "react";
 import Title from "@components/atoms/Title";
 import Divider from "@components/atoms/Divider";
 import Card from "@components/cards/Card";
-import Icon from "@mdi/react";
-import { mdiCodeBraces } from "@mdi/js/commonjs/mdi";
 import Link from "next/link";
 
 const GistList = ({ gists }) => {
@@ -27,8 +25,10 @@ const GistList = ({ gists }) => {
                   <Title size={3}>{entry.title}</Title>
                 </div>
                 <div className="flex">
-                  {entry.tags.map((tag) => (
-                    <div className="p-2 rounded-sm">{tag}</div>
+                  {entry.tags.map((tag, i) => (
+                    <div className="p-2 rounded-sm" key={i}>
+                      {tag}
+                    </div>
                   ))}
                 </div>
               </a>

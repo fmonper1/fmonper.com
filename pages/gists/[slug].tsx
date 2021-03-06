@@ -26,7 +26,7 @@ export default function PostPage({ post }) {
         <PageContainer className="my-8">
           <div
             id="post-entry"
-            className="space-y-3"
+            className="space-y-5"
             dangerouslySetInnerHTML={{
               __html: post.content,
             }}

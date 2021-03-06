@@ -4,7 +4,6 @@ import PostsService from "@utils/posts.service";
 import { GetStaticPaths, GetStaticProps } from "next/types";
 import PageContainer from "@components/template/PageContainer";
 import TransparentHero from "@components/template/hero/TransparentHero";
-import useMarkdown from "../../hooks/useMarkdown";
 import Button from "@components/atoms/Button";
 import Title from "@components/atoms/Title";
 import MarkdownParser from "@utils/markdown.parser";
@@ -31,7 +30,7 @@ export default function PostPage({ post, html }) {
         <PageContainer className="my-8">
           <div
             id="post-entry"
-            className="space-y-3"
+            className="space-y-5"
             dangerouslySetInnerHTML={{
               __html: html,
             }}
