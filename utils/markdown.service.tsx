@@ -4,12 +4,15 @@ import matter from "gray-matter";
 
 const postsDirectory = join(process.cwd(), "_posts");
 
+interface IMarkdownPost {
+  content: string;
+}
 const MarkdownService = {
   getPostSlugs() {
     return fs.readdirSync(postsDirectory);
   },
 
-  getPostBySlug(slug, fields = []) {
+  getPostBySlug(slug, fields = []): IMarkdownPost {
     const realSlug = slug.replace(/\.md$/, "");
     const fullPath = join(postsDirectory, `${realSlug}.md`);
     const fileContents = fs.readFileSync(fullPath, "utf8");
@@ -31,7 +34,7 @@ const MarkdownService = {
       }
     });
 
-    return items;
+    return items as IMarkdownPost;
   },
 
   getAllPosts(fields = []) {

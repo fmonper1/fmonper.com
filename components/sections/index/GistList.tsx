@@ -25,7 +25,6 @@ const GistList = ({ gists }) => {
               <a href={`gists/${entry.slug}`}>
                 <div className="flex">
                   <Title size={3}>{entry.title}</Title>
-                  <Icon path={mdiCodeBraces} size={1} />
                 </div>
                 <div className="flex">
                   {entry.tags.map((tag) => (
