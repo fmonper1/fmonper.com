@@ -12,8 +12,10 @@ import PortfolioService from "@utils/portfolio.service";
 import PostList from "@components/sections/index/PostList";
 import CardSection from "@components/sections/index/CardSection";
 import PortfolioList from "@components/sections/index/PortfoliotList";
+import GistList from "@components/sections/index/GistList";
+import MarkdownService, { getAllPosts } from "@utils/markdown.service";
 
-export default function Home({ posts, portfolio }) {
+export default function Home({ posts, gists, portfolio }) {
   return (
     <>
       <Head>
@@ -52,6 +54,9 @@ export default function Home({ posts, portfolio }) {
         </PageContainer>
         <PageContainer>
           <PostList posts={posts} />
+        </PageContainer>{" "}
+        <PageContainer>
+          <GistList gists={gists} />
         </PageContainer>
         <PageContainer>
           <PortfolioList items={portfolio} />
@@ -63,12 +68,15 @@ export default function Home({ posts, portfolio }) {
 
 export const getStaticProps: GetStaticProps = async () => {
   const posts = await PostsService.fetchEntries();
+  const gists = await MarkdownService.getPostList();
+  console.log(gists);
   const portfolio = await PortfolioService.fetchEntries();
 
   return {
     props: {
       posts,
       portfolio,
+      gists,
     },
   };
 };

@@ -1,14 +1,19 @@
-import { getAllPosts, getPostBySlug } from "@utils/markdown.service";
-import useMarkdown from "../../hooks/useMarkdown";
+import MarkdownService from "@utils/markdown.service";
 import Head from "next/head";
 import TransparentHero from "@components/template/hero/TransparentHero";
 import PageContainer from "@components/template/PageContainer";
 import Title from "@components/atoms/Title";
 import Button from "@components/atoms/Button";
-import React from "react";
+import React, { useEffect } from "react";
+import MarkdownParser from "@utils/markdown.parser";
+import * as prism from "prismjs";
 
 export default function PostPage({ post }) {
-  const html = useMarkdown(post.content);
+  // const html = useMarkdown(post.content);
+  useEffect(() => {
+    prism.highlightAll();
+  }, []);
+
   return (
     <>
       <Head>
@@ -23,7 +28,7 @@ export default function PostPage({ post }) {
             id="post-entry"
             className="space-y-3"
             dangerouslySetInnerHTML={{
-              __html: html,
+              __html: post.content,
             }}
           />
           <div className="mt-8">
@@ -44,7 +49,7 @@ export default function PostPage({ post }) {
 }
 
 export async function getStaticProps({ params }) {
-  const post = getPostBySlug(params.slug, [
+  const post = MarkdownService.getPostBySlug(params.slug, [
     "title",
     "date",
     "slug",
@@ -59,13 +64,14 @@ export async function getStaticProps({ params }) {
     props: {
       post: {
         ...post,
+        content: MarkdownParser.parse(post.content),
       },
     },
   };
 }
 
 export async function getStaticPaths() {
-  const posts = getAllPosts(["slug"]);
+  const posts = MarkdownService.getAllPosts(["slug"]);
 
   return {
     paths: posts.map((post) => {

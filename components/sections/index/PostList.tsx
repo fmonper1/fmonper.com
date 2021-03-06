@@ -15,7 +15,7 @@ const PostList = ({ posts }) => {
       <Title size={2} className="mb-4">
         Stuff I've written
       </Title>
-      <div className="space-y-4">
+      <div className="space-y-4 ">
         {posts.map((entry) => {
           const p = entry.fields;
           return (

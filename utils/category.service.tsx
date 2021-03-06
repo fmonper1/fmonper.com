@@ -1,10 +1,9 @@
 import { client } from "@utils/contentful.main";
-import { IPost } from "../@types/generated/contentful";
 
-const PostsService = {
+const CategoryService = {
   async fetchEntries() {
     const entries = await client.getEntries({
-      content_type: "post",
+      content_type: "category",
     });
     if (entries.items) return entries.items;
   },
@@ -14,14 +13,14 @@ const PostsService = {
     if (entry.sys) return entry;
   },
 
-  async getPostBySlug(slug: string): Promise<IPost> {
+  async getPostBySlug(slug: string) {
     const entry = await client.getEntries({
       content_type: "post",
       "fields.slug[match]": slug,
       include: 1,
     });
-    return entry.items[0] as IPost;
+    return entry.items[0];
   },
 };
 
-export default PostsService;
+export default CategoryService;

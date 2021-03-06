@@ -8,7 +8,7 @@
     "postbuild": "next-on-netlify",
     "start": "next start",
     "export": "next export",
-    "contentful-typescript-codegen": "contentful-typescript-codegen --output @types/generated/contentful.d.ts"
+    "contentful-typescript-codegen": "set NODE_ENV=local && contentful-typescript-codegen --output @types/generated/contentful.d.ts"
   },
   "dependencies": {
     "@contentful/rich-text-html-renderer": "^14.1.2",
@@ -20,6 +20,7 @@
     "babel-plugin-prismjs": "^2.0.1",
     "contentful": "^7.14.6",
     "contentful-management": "^7.9.0",
+    "cross-env": "^7.0.3",
     "dompurify": "^2.2.2",
     "gray-matter": "^4.0.2",
     "marked": "^1.2.5",

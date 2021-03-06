@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Head from "next/head";
 import PostsService from "@utils/posts.service";
 import { GetStaticPaths, GetStaticProps } from "next/types";
@@ -7,9 +7,15 @@ import TransparentHero from "@components/template/hero/TransparentHero";
 import useMarkdown from "../../hooks/useMarkdown";
 import Button from "@components/atoms/Button";
 import Title from "@components/atoms/Title";
+import MarkdownParser from "@utils/markdown.parser";
+import * as prism from "prismjs";
 
-export default function PostPage({ post }) {
-  const html = useMarkdown(post?.fields.body);
+export default function PostPage({ post, html }) {
+  // const html = useMarkdown(post?.fields.body);
+  useEffect(() => {
+    prism.highlightAll();
+  }, []);
+
   return (
     <>
       <Head>
@@ -53,6 +59,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
   return {
     props: {
       post: res,
+      html: MarkdownParser.parse(res?.fields.body),
     },
   };
 };
