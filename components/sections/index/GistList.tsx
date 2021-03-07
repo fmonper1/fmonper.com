@@ -14,7 +14,7 @@ const GistList = ({ gists }) => {
         </Title>
       </div>
       <Title size={2} className="mb-4">
-        Bits and pieces
+        Stuff I reuse
       </Title>
       <div className="space-y-4 w-full flex">
         {gists.map((entry, i) => (
