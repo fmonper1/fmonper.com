@@ -21,6 +21,7 @@
     "contentful": "^7.14.6",
     "contentful-management": "^7.9.0",
     "cross-env": "^7.0.3",
+    "dayjs": "^1.10.4",
     "dompurify": "^2.2.2",
     "gray-matter": "^4.0.2",
     "marked": "^1.2.5",

@@ -46,5 +46,9 @@ module.exports = {
   variants: {
     padding: ["responsive", "first", "hover", "focus", "last"],
     display: ["responsive", "hover", "focus", "group-hover"],
+    background: ["responsive", "hover", "focus", "group-hover"],
+    translate: ["responsive", "active", "hover", "focus", "group-hover"],
+    transform: ["responsive", "active", "hover", "focus", "group-hover"],
+    scale: ["responsive", "active", "hover", "focus", "group-hover"],
   },
 };

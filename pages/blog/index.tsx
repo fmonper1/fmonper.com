@@ -1,5 +1,5 @@
 import Head from "next/head";
-import PostsService from "@utils/posts.service";
+import PostsService from "../../services/posts.service";
 import Post from "@components/posts/Post";
 import { GetStaticProps } from "next";
 import PageContainer from "@components/template/PageContainer";

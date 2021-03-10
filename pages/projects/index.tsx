@@ -2,7 +2,7 @@ import Head from "next/head";
 import { GetStaticProps } from "next";
 import PageContainer from "@components/template/PageContainer";
 import TransparentHero from "@components/template/hero/TransparentHero";
-import PortfolioService from "@utils/portfolio.service";
+import PortfolioService from "../../services/portfolio.service";
 import PortfolioBannerItem from "@components/portfolio/PortfolioBannerItem";
 import React from "react";
 

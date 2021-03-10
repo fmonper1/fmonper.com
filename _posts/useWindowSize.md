@@ -1,5 +1,5 @@
 ---
-title: 'useWindowSize'
+title: 'useWindowSize Hook'
 date: '2020-03-16T05:35:07.322Z'
 tags:
   - react

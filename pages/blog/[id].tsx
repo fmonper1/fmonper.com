@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import Head from "next/head";
-import PostsService from "@utils/posts.service";
+import PostsService from "../../services/posts.service";
 import { GetStaticPaths, GetStaticProps } from "next/types";
 import PageContainer from "@components/template/PageContainer";
 import TransparentHero from "@components/template/hero/TransparentHero";

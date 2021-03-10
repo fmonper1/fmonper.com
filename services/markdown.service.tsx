@@ -4,9 +4,18 @@ import matter from "gray-matter";
 
 const postsDirectory = join(process.cwd(), "_posts");
 
-interface IMarkdownPost {
-  content: string;
+interface NavItem {
+  title: string;
+  slug: string;
 }
+export interface IMarkdownPost {
+  title?: string;
+  slug?: string;
+  content: string;
+  nextPost?: NavItem;
+  previousPost?: NavItem;
+}
+
 const MarkdownService = {
   getPostSlugs() {
     return fs.readdirSync(postsDirectory);
@@ -34,18 +43,38 @@ const MarkdownService = {
       }
     });
 
-    return items as IMarkdownPost;
+    return {
+      ...items,
+    } as IMarkdownPost;
+  },
+
+  getPreviousAndNextPosts(slug: string) {
+    const realSlug = slug.replace(/\.md$/, "");
+
+    const slugs = MarkdownService.getPostSlugs();
+    const fieldsToGet = ["title", "slug"];
+    const indexOfPost = slugs.indexOf(`${realSlug}.md`);
+    const previousPost = slugs[indexOfPost - 1]
+      ? this.getPostBySlug(slugs[indexOfPost - 1], fieldsToGet)
+      : null;
+    const nextPost = slugs[indexOfPost + 1]
+      ? this.getPostBySlug(slugs[indexOfPost + 1], fieldsToGet)
+      : null;
+
+    return { previousPost, nextPost };
   },
 
   getAllPosts(fields = []) {
     const slugs = MarkdownService.getPostSlugs();
-    const posts = slugs
-      .map((slug) => MarkdownService.getPostBySlug(slug, fields))
-      // sort posts by date in descending order
-      // @ts-ignore
-      .sort((post1, post2) => (post1.date > post2.date ? -1 : 1));
-    return posts;
+    return (
+      slugs
+        .map((slug) => MarkdownService.getPostBySlug(slug, fields))
+        // sort posts by date in descending order
+        // @ts-ignore
+        .sort((post1, post2) => (post1.date > post2.date ? -1 : 1))
+    );
   },
+
   getPostList() {
     return MarkdownService.getAllPosts(["title", "slug", "author", "tags"]);
   },
