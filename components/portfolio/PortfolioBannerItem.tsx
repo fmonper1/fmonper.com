@@ -1,19 +1,79 @@
 import Title from "@components/atoms/Title";
 import React from "react";
+import Button from "@components/atoms/Button";
+import Link from "next/link";
 
-function PortfolioBannerItem({ entry }) {
-  const { title } = entry?.fields;
+function PortfolioBannerItem({ entry, reverse }) {
+  const { title, description, previewUrl, stack } = entry?.fields;
   const { file } = entry?.fields?.cover.fields;
 
   return (
     <div
-      className="group flex h-72 bg-cover bg-top hover:bg-bottom rounded-lg shadow-xl hover:shadow-3xl transition transition-shadow duration-75 "
-      style={{ backgroundImage: `url(https:${file.url})` }}
+      className={`group flex flex-wrap ${
+        reverse ? "md:flex-row-reverse" : ""
+      } md:flex-nowrap space-y-8 md:space-y-0`}
     >
-      <div className="flex w-full flex-col space-y-2 justify-end bg-primary-main bg-opacity-80 opacity-0 rounded-lg group-hover:opacity-100 transition transition-all duration-75 p-4">
-        <Title size={2} color="text-secondary-main">
-          {title}
-        </Title>
+      <div className="w-full md:w-1/2 lg:w-2/5 flex items-center">
+        <div className="space-y-4">
+          <Title size={3} color="text-2xl md:text-3xl text-primary">
+            {title}
+          </Title>
+          <p>{description}</p>
+          {stack && (
+            <p className="bg-white p-2 rounded-md">
+              <span className="font-bold text-primary">Tech stack:</span>{" "}
+              {stack}
+            </p>
+          )}
+          <div className="flex box">
+            {previewUrl && (
+              <Link href={previewUrl}>
+                <a href={previewUrl}>
+                  <Button style="primary">Preview</Button>
+                </a>
+              </Link>
+            )}
+          </div>
+        </div>
+      </div>
+      <div
+        className={`${
+          reverse ? "md:mr-4" : "md:ml-4"
+        } w-full md:w-1/2 lg:w-3/5 w-full relative flex items-end justify-end pb-10`}
+      >
+        <div
+          className={`${
+            reverse ? "md:mr-4" : "md:ml-4"
+          } absolute transform -translate-x-10 translate-y-6 rounded-lg shadow-xl hover:shadow-3xl transition-colors bg-secondary border-secondary `}
+          style={{
+            borderWidth: "14px 4px 20px 4px",
+          }}
+        >
+          <div
+            className="rounded-lg bg-cover bg-top "
+            style={{
+              backgroundImage: `url(https:${file.url})`,
+              height: "350px",
+              width: "220px",
+            }}
+          />
+        </div>
+        <div
+          className={`${
+            reverse ? "md:mr-4" : "md:ml-4"
+          } w-full bg-primary rounded-lg shadow-xl hover:shadow-3xl transition-colors border-primary`}
+          style={{
+            borderWidth: "10px",
+          }}
+        >
+          <div
+            className="rounded-lg bg-cover  bg-top"
+            style={{
+              backgroundImage: `url(https:${file.url})`,
+              height: "400px",
+            }}
+          />
+        </div>
       </div>
     </div>
   );

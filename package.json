@@ -36,7 +36,8 @@
     "react-copy-to-clipboard": "^5.0.3",
     "react-dom": "16.13.1",
     "react-i18next": "^11.7.3",
-    "sass": "^1.29.0",
+    "react-reveal": "^1.2.2",
+    "sass": "^1.32.12",
     "tailwindcss": "npm:@tailwindcss/postcss7-compat"
   },
   "devDependencies": {

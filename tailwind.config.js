@@ -44,6 +44,7 @@ module.exports = {
     },
   },
   variants: {
+    boxShadow: ["responsive", "hover", "focus", "group-hover"],
     padding: ["responsive", "first", "hover", "focus", "last"],
     display: ["responsive", "hover", "focus", "group-hover"],
     background: ["responsive", "hover", "focus", "group-hover"],

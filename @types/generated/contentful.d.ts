@@ -34,6 +34,18 @@ export interface IPortfolioFields {
 
   /** cover */
   cover?: Asset | undefined;
+
+  /** description */
+  description?: string | undefined;
+
+  /** stack */
+  stack?: string | undefined;
+
+  /** previewUrl */
+  previewUrl?: string | undefined;
+
+  /** repositoryUrl */
+  repositoryUrl?: string | undefined;
 }
 
 export interface IPortfolio extends Entry<IPortfolioFields> {

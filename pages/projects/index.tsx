@@ -5,6 +5,7 @@ import TransparentHero from "@components/template/hero/TransparentHero";
 import PortfolioService from "../../services/portfolio.service";
 import PortfolioBannerItem from "@components/portfolio/PortfolioBannerItem";
 import React from "react";
+import FadeIn from "@components/atoms/FadeIn";
 
 export default function Portfolio({ portfolio }) {
   return (
@@ -16,10 +17,12 @@ export default function Portfolio({ portfolio }) {
         <TransparentHero title="Projects" subtitle="Stuff I've worked on" />
 
         <PageContainer>
-          <div className="flex flex-wrap">
-            {portfolio.map((entry) => (
-              <div className="w-full sm:w-1/2 md:w-1/3 p-3">
-                <PortfolioBannerItem entry={entry} />
+          <div className="space-y-16 ">
+            {portfolio.map((entry, i) => (
+              <div className="w-full" key={i}>
+                <FadeIn>
+                  <PortfolioBannerItem entry={entry} reverse={i % 2 !== 0} />
+                </FadeIn>
               </div>
             ))}
           </div>

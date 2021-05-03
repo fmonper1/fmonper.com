@@ -1,0 +1,37 @@
+.cursor {
+  width: 40px;
+  height: 40px;
+  border: 2px solid #fca311;
+  border-radius: 100%;
+  position: fixed;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  transition: all 100ms ease;
+  transition-property: background-color, opacity, transform, mix-blend-mode;
+  z-index: 9999;
+  mix-blend-mode: difference;
+}
+
+.cursor--hidden {
+  opacity: 0;
+}
+
+.cursor--link-hovered {
+  transform: translate(-50%, -50%) scale(1.25);
+  background-color: #14213d;
+}
+
+.cursor--clicked {
+  transform: translate(-50%, -50%) scale(0.9);
+  background-color: #14213d;
+}
+
+//html,
+//body {
+//  cursor: none;
+//}
+//
+//html *,
+//body * {
+//  cursor: none;
+//}

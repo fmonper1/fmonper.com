@@ -10,33 +10,50 @@ const request = async (config: AxiosRequestConfig) => {
 };
 
 export default {
-  get: async (url: string, config: AxiosRequestConfig) =>
+  get: async (url: string, config?: AxiosRequestConfig) =>
     request({
       method: "get",
       url,
       ...config,
     }),
-  put: async (url: string, config: AxiosRequestConfig) =>
+
+  put: async (
+    url: string,
+    data: AxiosRequestConfig["data"],
+    config?: AxiosRequestConfig
+  ) =>
     request({
       method: "put",
       url,
+      data,
       ...config,
     }),
-  post: async (url: string, config: AxiosRequestConfig) =>
+
+  post: async (
+    url: string,
+    data: AxiosRequestConfig["data"],
+    config?: AxiosRequestConfig
+  ) =>
     request({
       method: "post",
       url,
+      data,
       ...config,
     }),
 
-  patch: async (url: string, config: AxiosRequestConfig) =>
+  patch: async (
+    url: string,
+    data: AxiosRequestConfig["data"],
+    config?: AxiosRequestConfig
+  ) =>
     request({
       method: "patch",
       url,
+      data,
       ...config,
     }),
 
-  delete: async (url: string, config: AxiosRequestConfig) =>
+  delete: async (url: string, config?: AxiosRequestConfig) =>
     request({
       method: "delete",
       url,

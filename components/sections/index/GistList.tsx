@@ -27,11 +27,14 @@ const GistList = ({ gists }) => {
       </Title>
       <div className="space-y-2 w-full flex flex-col">
         {gists.map((entry, i) => (
-          <div className=" w-full" key={i}>
+          <div
+            className="group w-full transition rounded-sm hover:shadow-lg  hover:bg-white p-2 my-1"
+            key={i}
+          >
             <Link href={`gists/${entry.slug}`}>
               <a href={`gists/${entry.slug}`}>
-                <div className="group flex mt-4 items-center">
-                  <div className="transition-colors bg-primary-main group-hover:bg-secondary text-white m-1 rounded-sm">
+                <div className="flex items-center">
+                  <div className="mr-3 transition-colors bg-primary-main group-hover:bg-secondary text-white m-1 rounded-sm">
                     <div className="rounded-sm text-sm p-1">
                       <Icon path={getIcon(entry.tags[0])} size={0.85} />
                     </div>

@@ -59,7 +59,7 @@ export default function Home({ posts, gists, portfolio, repos }) {
           <PostList posts={posts} />
         </PageContainer>{" "}
         <PageContainer>
-          <div className="flex flex-wrap md:flex-nowrap">
+          <div className="space-y-10 md:space-y-0 md:space-x-4 flex flex-wrap md:flex-nowrap">
             <div className="w-full md:w-1/2 ">
               <GistList gists={gists} />
             </div>
