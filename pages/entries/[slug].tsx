@@ -1,4 +1,4 @@
-import { GistsService } from "../../services/markdown.service";
+import { GistsService, PostsService } from "../../services/markdown.service";
 import Head from "next/head";
 import TransparentHero from "@components/template/hero/TransparentHero";
 import PageContainer from "@components/template/PageContainer";
@@ -52,8 +52,8 @@ export default function PostPage({ post }) {
               style={{ minWidth: "270px" }}
             >
               {post?.previousPost && (
-                <Link href={`/gists/${post?.previousPost.slug}`}>
-                  <a href={`/gists/${post?.previousPost.slug}`}>
+                <Link href={`/entries/${post?.previousPost.slug}`}>
+                  <a href={`/entries/${post?.previousPost.slug}`}>
                     <div className="flex w-full justify-between bg-primary p-2 hover:bg-primary-light transition transition-colors">
                       <Icon
                         path={mdiArrowLeftBold}
@@ -83,8 +83,8 @@ export default function PostPage({ post }) {
             </div>
             <div className="w-full md:w-auto" style={{ minWidth: "270px" }}>
               {post?.nextPost && (
-                <Link href={`/gists/${post?.nextPost.slug}`}>
-                  <a href={`/gists/${post?.nextPost.slug}`}>
+                <Link href={`/entries/${post?.nextPost.slug}`}>
+                  <a href={`/entries/${post?.nextPost.slug}`}>
                     <div className="group flex w-full justify-between bg-primary p-2 hover:bg-primary-light transition transition-colors">
                       <div className="text-white flex items-center px-2">
                         {post?.nextPost.title}
@@ -109,7 +109,7 @@ export default function PostPage({ post }) {
 }
 
 export async function getStaticProps({ params }) {
-  const post = GistsService.getPostBySlug(params.slug, [
+  const post = PostsService.getPostBySlug(params.slug, [
     "title",
     "date",
     "slug",
@@ -118,9 +118,10 @@ export async function getStaticProps({ params }) {
     "ogImage",
     "coverImage",
     "tags",
+    "excerpt",
   ]);
 
-  const postNavigation = GistsService.getPreviousAndNextPosts(params.slug);
+  const postNavigation = PostsService.getPreviousAndNextPosts(params.slug);
   return {
     props: {
       post: {
@@ -133,7 +134,7 @@ export async function getStaticProps({ params }) {
 }
 
 export async function getStaticPaths() {
-  const posts = GistsService.getAllPosts(["slug"]);
+  const posts = PostsService.getAllPosts(["slug"]);
 
   return {
     paths: posts.map((post) => {

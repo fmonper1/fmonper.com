@@ -3,7 +3,11 @@ import React from "react";
 import Button from "@components/atoms/Button";
 import Link from "next/link";
 
-function PortfolioBannerItem({ entry, reverse }) {
+interface Props {
+  entry: any;
+  reverse?: boolean;
+}
+function PortfolioBannerItem({ entry, reverse }: Props) {
   const { title, description, previewUrl, stack } = entry?.fields;
   const { file } = entry?.fields?.cover.fields;
 

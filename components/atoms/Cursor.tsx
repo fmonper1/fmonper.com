@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import clsx from "clsx";
 
 const isMobile = () => {
   const ua = navigator.userAgent;
@@ -63,11 +62,12 @@ const Cursor = () => {
     });
   };
 
-  const cursorClasses = clsx("cursor", {
-    "cursor--clicked": clicked,
-    "cursor--hidden": hidden,
-    "cursor--link-hovered": linkHovered,
-  });
+  const cursorClasses = "";
+  //     clsx("cursor", {
+  //   "cursor--clicked": clicked,
+  //   "cursor--hidden": hidden,
+  //   "cursor--link-hovered": linkHovered,
+  // });
 
   return (
     <div

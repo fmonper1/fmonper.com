@@ -13,7 +13,10 @@ import PostList from "@components/sections/index/PostList";
 import CardSection from "@components/sections/index/CardSection";
 import PortfolioList from "@components/sections/index/PortfoliotList";
 import GistList from "@components/sections/index/GistList";
-import MarkdownService from "../services/markdown.service";
+import {
+  GistsService,
+  PostsService as MDPostsService,
+} from "../services/markdown.service";
 import GithubService from "../services/github.service";
 import React from "react";
 import RepoList from "@components/sections/index/RepoList";
@@ -78,7 +81,8 @@ export default function Home({ posts, gists, portfolio, repos }) {
 
 export const getStaticProps: GetStaticProps = async () => {
   const posts = await PostsService.fetchEntries();
-  const gists = await MarkdownService.getPostList();
+  const gists = await GistsService.getPostList();
+  // const posts = await MDPostsService.getPostList();
   const portfolio = await PortfolioService.fetchEntries();
   const repos = await GithubService.getRepos();
 
