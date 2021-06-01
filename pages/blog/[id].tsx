@@ -54,11 +54,11 @@ export default function PostPage({ post, html }) {
 
 export const getStaticProps: GetStaticProps = async (context) => {
   const res = await PostsService.getPostBySlug(String(context.params.id));
-
+  const { data, headings } = MarkdownParser.parse(res?.fields.body);
   return {
     props: {
       post: res,
-      html: MarkdownParser.parse(res?.fields.body),
+      html: data,
     },
   };
 };

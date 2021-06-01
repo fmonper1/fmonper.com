@@ -20,6 +20,8 @@ import {
 import GithubService from "../services/github.service";
 import React from "react";
 import RepoList from "@components/sections/index/RepoList";
+import AboutMeSection from "@components/sections/index/AboutMe";
+import FadeIn from "@components/atoms/FadeIn";
 
 export default function Home({ posts, gists, portfolio, repos }) {
   return (
@@ -56,20 +58,26 @@ export default function Home({ posts, gists, portfolio, repos }) {
           </div>
         </TransparentHero>
         <PageContainer>
-          <CardSection />
+          <FadeIn>
+            <CardSection />
+          </FadeIn>
         </PageContainer>
         <PageContainer>
-          <PostList posts={posts} />
-        </PageContainer>{" "}
+          <FadeIn>
+            <PostList posts={posts} />
+          </FadeIn>
+        </PageContainer>
         <PageContainer>
-          <div className="space-y-10 md:space-y-0 md:space-x-4 flex flex-wrap md:flex-nowrap">
-            <div className="w-full md:w-1/2 ">
-              <GistList gists={gists} />
+          <FadeIn>
+            <div className="space-y-10 md:space-y-0 md:space-x-4 flex flex-wrap md:flex-nowrap">
+              <div className="w-full md:w-1/2 ">
+                <GistList gists={gists} />
+              </div>
+              <div className="w-full md:w-1/2 ">
+                <RepoList repos={repos} />
+              </div>
             </div>
-            <div className="w-full md:w-1/2 ">
-              <RepoList repos={repos} />
-            </div>
-          </div>
+          </FadeIn>
         </PageContainer>
         <PageContainer>
           <PortfolioList items={portfolio} />

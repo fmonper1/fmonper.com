@@ -5,7 +5,7 @@ date: '2020-03-16T05:35:07.322Z'
 tags:
 - react
 - markdown
-excerpt: Creating static websites has never been easier. Find out how to render markdown from any headless CMS or your file system inside your React components.
+excerpt: 'Creating static websites has never been easier. Find out how to render markdown from any headless CMS or your file system inside your React components.'
 ---
 
 Creating static websites has never been easier. The JAMStack has made it very easy to create complex static websites utilizing the power of Markup.

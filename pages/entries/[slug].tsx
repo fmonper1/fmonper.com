@@ -4,18 +4,27 @@ import TransparentHero from "@components/template/hero/TransparentHero";
 import PageContainer from "@components/template/PageContainer";
 import Title from "@components/atoms/Title";
 import Button from "@components/atoms/Button";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import MarkdownParser from "@utils/markdown.parser";
 import * as prism from "prismjs";
 import Icon from "@mdi/react";
-import { mdiArrowLeftBold, mdiArrowRightBold, mdiHome } from "@mdi/js";
+import {
+  mdiArrowLeftBold,
+  mdiArrowRightBold,
+  mdiHome,
+  mdiMinus,
+  mdiPlus,
+} from "@mdi/js";
 import Link from "next/link";
+import clsx from "clsx";
 
-export default function PostPage({ post }) {
+export default function PostPage({ post, headings }) {
   // const html = useMarkdown(post.content);
   useEffect(() => {
     prism.highlightAll();
   }, [post]);
+
+  const [openToc, setOpenToc] = useState<boolean>(true);
 
   return (
     <>
@@ -26,7 +35,36 @@ export default function PostPage({ post }) {
       <main>
         <TransparentHero title={post?.title} subtitle={post?.subtitle} />
 
-        <PageContainer className="my-8">
+        <PageContainer className="my-8" size="narrow">
+          <div className="flex">
+            <div className="p-3 bg-white rounded-md mb-8">
+              <div className="flex items-center">
+                <Title size={2} className="text-lg">
+                  Table of Contents
+                </Title>
+
+                <Button
+                  size="xs"
+                  className="ml-4"
+                  onClick={() => setOpenToc((open) => !open)}
+                >
+                  <Icon path={openToc ? mdiMinus : mdiPlus} size={1} />
+                </Button>
+              </div>
+              <div
+                className={clsx(
+                  "transform transition-all",
+                  !openToc && "scale-y-0 max-h-0"
+                )}
+              >
+                {headings.map((item) => (
+                  <div style={{ paddingLeft: `${(item.level - 2) * 24}px` }}>
+                    <a href={`#${item.slug}`}>{item.text}</a>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
           <div
             id="post-entry"
             className="space-y-5"
@@ -111,6 +149,7 @@ export default function PostPage({ post }) {
 export async function getStaticProps({ params }) {
   const post = PostsService.getPostBySlug(params.slug, [
     "title",
+    "subtitle",
     "date",
     "slug",
     "author",
@@ -122,13 +161,15 @@ export async function getStaticProps({ params }) {
   ]);
 
   const postNavigation = PostsService.getPreviousAndNextPosts(params.slug);
+  const { data, headings } = MarkdownParser.parse(post.content);
   return {
     props: {
       post: {
         ...post,
         ...postNavigation,
-        content: MarkdownParser.parse(post.content),
+        content: data,
       },
+      headings,
     },
   };
 }

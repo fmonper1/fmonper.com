@@ -4,8 +4,8 @@ interface Props {
   size: number;
   className?: string;
   children: any;
-  props?: any;
   color?: any;
+  [props: string]: any;
 }
 
 const Title = ({ size, className, children, color, ...props }: Props) => {

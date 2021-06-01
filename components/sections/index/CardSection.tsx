@@ -2,6 +2,7 @@ import React from "react";
 import Card from "@components/cards/Card";
 import Title from "@components/atoms/Title";
 import Button from "@components/atoms/Button";
+import Link from "next/link";
 
 const CardSection = (props) => {
   return (
@@ -58,7 +59,11 @@ const CardSection = (props) => {
               <Title size={2} color="text-white">
                 Check out my work
               </Title>
-              <Button>Portfolio</Button>
+              <Link href="/projects">
+                <a href="/projects">
+                  <Button>Portfolio</Button>
+                </a>
+              </Link>
             </div>
           </Card>
         </div>
