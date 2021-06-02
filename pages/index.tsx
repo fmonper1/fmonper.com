@@ -1,5 +1,4 @@
 import Head from "next/head";
-import PostsService from "../services/posts.service";
 import { GetStaticProps } from "next";
 import Link from "next/link";
 import PageContainer from "@components/template/PageContainer";
@@ -8,13 +7,12 @@ import TransparentHero from "@components/template/hero/TransparentHero";
 import Button from "@components/atoms/Button";
 import Icon from "@mdi/react";
 import { mdiGithub, mdiLinkedin } from "@mdi/js";
-import PortfolioService from "../services/portfolio.service";
 import PostList from "@components/sections/index/PostList";
 import CardSection from "@components/sections/index/CardSection";
 import PortfolioList from "@components/sections/index/PortfoliotList";
 import GistList from "@components/sections/index/GistList";
 import {
-  GistsService,
+  GistsService, PostsService,
   PostsService as MDPostsService,
 } from "../services/markdown.service";
 import GithubService from "../services/github.service";
@@ -88,10 +86,10 @@ export default function Home({ posts, gists, portfolio, repos }) {
 }
 
 export const getStaticProps: GetStaticProps = async () => {
-  const posts = await PostsService.fetchEntries();
+  const posts = await PostsService.getPostList();
   const gists = await GistsService.getPostList();
   // const posts = await MDPostsService.getPostList();
-  const portfolio = await PortfolioService.fetchEntries();
+  const portfolio = [];
   const repos = await GithubService.getRepos();
 
   return {

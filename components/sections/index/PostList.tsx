@@ -2,6 +2,7 @@ import React from "react";
 import Title from "@components/atoms/Title";
 import Post from "@components/posts/Post";
 import Divider from "@components/atoms/Divider";
+import PostMD from "@components/posts/PostMD";
 
 const PostList = ({ posts }) => {
   return (
@@ -16,17 +17,10 @@ const PostList = ({ posts }) => {
         Stuff I've written
       </Title>
       <div className="space-y-4 ">
-        {posts.map((entry) => {
-          const p = entry.fields;
-          return (
-            <Post
-              entry={entry}
-              key={entry.sys.id}
-              image={p.image?.fields}
-              title={p.title}
-            />
-          );
-        })}
+          {posts.map((entry) => {
+              const p = entry.fields;
+              return <PostMD entry={entry} />;
+          })}
       </div>
     </>
   );
