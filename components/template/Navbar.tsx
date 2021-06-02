@@ -26,7 +26,7 @@ const Navbar = () => {
       <MyLink href="/">
         <Icon path={mdiHome} size={1} /> Home
       </MyLink>
-      <MyLink href="/entries">
+      <MyLink href="/blog">
         <Icon path={mdiBlogger} size={1} /> Blog
       </MyLink>
       <MyLink href="/projects">

@@ -54,9 +54,10 @@ export default function PostPage({ post, headings }) {
               <div
                 className={clsx(
                   "transform transition-all",
-                  !openToc && "scale-y-0 max-h-0"
+                  !openToc && "scale-y-0 max-h-0",
                 )}
               >
+                <div className="border-t border-secondary my-2"/>
                 {headings.map((item) => (
                   <div style={{ paddingLeft: `${(item.level - 2) * 24}px` }}>
                     <a href={`#${item.slug}`}>{item.text}</a>
@@ -90,8 +91,8 @@ export default function PostPage({ post, headings }) {
               style={{ minWidth: "270px" }}
             >
               {post?.previousPost && (
-                <Link href={`/entries/${post?.previousPost.slug}`}>
-                  <a href={`/entries/${post?.previousPost.slug}`}>
+                <Link href={`/blog/${post?.previousPost.slug}`}>
+                  <a href={`/blog/${post?.previousPost.slug}`}>
                     <div className="flex w-full justify-between bg-primary p-2 hover:bg-primary-light transition transition-colors">
                       <Icon
                         path={mdiArrowLeftBold}
@@ -121,8 +122,8 @@ export default function PostPage({ post, headings }) {
             </div>
             <div className="w-full md:w-auto" style={{ minWidth: "270px" }}>
               {post?.nextPost && (
-                <Link href={`/entries/${post?.nextPost.slug}`}>
-                  <a href={`/entries/${post?.nextPost.slug}`}>
+                <Link href={`/blog/${post?.nextPost.slug}`}>
+                  <a href={`/blog/${post?.nextPost.slug}`}>
                     <div className="group flex w-full justify-between bg-primary p-2 hover:bg-primary-light transition transition-colors">
                       <div className="text-white flex items-center px-2">
                         {post?.nextPost.title}

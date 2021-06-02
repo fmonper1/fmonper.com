@@ -67,10 +67,13 @@ class MarkdownService {
   }
 
   getPostBySlug(slug, fields = []): IMarkdownPost {
+    let realSlug = slug.replace(/\.md$/, "");
+    const paths = this.getPostPaths();
+
     // find matching
-    const foundPath = this.slugsToPaths[slug]
+    const foundPath = paths.filter((i) => i.indexOf(realSlug) > -1)[0];
     // join pathname with directory
-    const fullPath = join(this.directory, foundPath);
+    let fullPath = join(this.directory, foundPath);
     // read file
     const fileContents = fs.readFileSync(fullPath, "utf8");
 
@@ -95,12 +98,12 @@ class MarkdownService {
   }
 
   getPreviousAndNextPosts(slug: string) {
-    console.log('slug: ', slug)
+    const realSlug = slug.replace(/\.md$/, "");
 
-    const slugs = Object.keys(this.slugsToPaths)
+    const slugs = this.getPostPaths().map((i) => this.trimDate(i));
     console.log("slugs :", slugs);
     const fieldsToGet = ["title"];
-    const indexOfPost = slugs.indexOf(slug);
+    const indexOfPost = slugs.indexOf(`${realSlug}.md`);
 
     const previousPost =
       indexOfPost > 0
@@ -111,14 +114,16 @@ class MarkdownService {
         ? this.getPostBySlug(slugs[indexOfPost + 1], fieldsToGet)
         : null;
 
+    console.log("previousPost :", previousPost);
+    console.log("nextPost :", nextPost);
+
     return { previousPost, nextPost };
   }
 
   getAllPosts(fields = []) {
     console.log(this.slugsToPaths);
     console.log(this.pathsToSlugs);
-    // const slugs = this.getPostPaths().map((i) => this.trimDate(i));
-    const slugs = Object.values(this.pathsToSlugs)
+    const slugs = this.getPostPaths().map((i) => this.trimDate(i));
     return (
       slugs
         .map((slug) => this.getPostBySlug(slug, fields))

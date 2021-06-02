@@ -14,8 +14,8 @@ function PostMD({ entry }: Props) {
 
   return (
     <Card>
-      <Link href={`entries/${entry.slug}`}>
-        <a href={`entries/${entry.slug}`}>
+      <Link href={`blog/${entry.slug}`}>
+        <a href={`blog/${entry.slug}`}>
           <div className="flex">
             <div className="hidden md:flex justify-center items-center">
               <div
@@ -24,7 +24,7 @@ function PostMD({ entry }: Props) {
               >
                 <img
                   alt={entry.title}
-                  src={`entries/${entry.path.slice(
+                  src={`blog/${entry.path.slice(
                     0,
                     entry.path.length - 3
                   )}/preview.png`}
