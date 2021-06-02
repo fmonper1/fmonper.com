@@ -5,17 +5,15 @@ import { mdiBlogger, mdiBriefcase, mdiClose, mdiHome } from "@mdi/js";
 import Button from "../atoms/Button";
 import FadeIn from "@components/atoms/FadeIn";
 
-interface Props {
-  toggleNavbar: () => void;
-}
 interface LinkProps {
   href: string;
   children?;
   className?: string;
   props?;
+  icon: any;
   onClick?: (e) => any;
 }
-const MyLink = ({ href, children, className, ...props }: LinkProps) => (
+const MyLink = ({ href, children, className, icon, ...props }: LinkProps) => (
   <Link href={href}>
     <a
       className={`text-white transition-colors duration-100 rounded-md p-2 flex ${
@@ -24,37 +22,27 @@ const MyLink = ({ href, children, className, ...props }: LinkProps) => (
       {...props}
       href={href}
     >
+      <Icon path={icon} size={1} className="mr-2" />
       {children}
     </a>
   </Link>
 );
-const MobileNavbar = ({ toggleNavbar }: Props) => {
-  useEffect(() => {
-    document.body.style.overflow = "hidden";
-    return () => (document.body.style.overflow = "unset");
-  }, []);
+const MobileNavbar = () => {
   return (
-    <div className="w-full flex flex-col space-y-4 p-4">
-      <div className="flex justify-end" style={{ height: 40 }}>
-        <Button onClick={toggleNavbar}>
-          <Icon path={mdiClose} size={1} />{" "}
-        </Button>
-      </div>
-      <FadeIn>
-        {/*<div className="relative">*/}
-        {/*  <LanguageSelector />*/}
-        {/*</div>*/}
+    <div className="w-full flex flex-col space-y-2 p-4">
+      {/*<div className="relative">*/}
+      {/*  <LanguageSelector />*/}
+      {/*</div>*/}
 
-        <MyLink href="/">
-          <Icon path={mdiHome} size={1} /> Home
-        </MyLink>
-        <MyLink href="/blog">
-          <Icon path={mdiBlogger} size={1} /> Blog
-        </MyLink>
-        <MyLink href="/projects">
-          <Icon path={mdiBriefcase} size={1} /> Projects
-        </MyLink>
-      </FadeIn>
+      <MyLink href="/" icon={mdiHome}>
+        Home
+      </MyLink>
+      <MyLink href="/blog" icon={mdiBlogger}>
+        Blog
+      </MyLink>
+      <MyLink href="/projects" icon={mdiBriefcase}>
+        Projects
+      </MyLink>
     </div>
   );
 };
