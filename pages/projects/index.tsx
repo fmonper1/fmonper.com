@@ -33,7 +33,7 @@ export default function Portfolio({ portfolio }) {
 }
 
 export const getStaticProps: GetStaticProps = async () => {
-  const portfolio = await PortfolioService.fetchEntries();
+  const portfolio = PortfolioService;
 
   return {
     props: {

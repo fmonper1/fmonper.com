@@ -15,6 +15,7 @@ import {
   GistsService, PostsService,
   PostsService as MDPostsService,
 } from "../services/markdown.service";
+import PortfolioService from "../services/portfolio.service";
 import GithubService from "../services/github.service";
 import React from "react";
 import RepoList from "@components/sections/index/RepoList";
@@ -89,7 +90,7 @@ export const getStaticProps: GetStaticProps = async () => {
   const posts = await PostsService.getPostList();
   const gists = await GistsService.getPostList();
   // const posts = await MDPostsService.getPostList();
-  const portfolio = [];
+  const portfolio = PortfolioService;
   const repos = await GithubService.getRepos();
 
   return {
