@@ -45,12 +45,15 @@ function PortfolioBannerItem({ entry, reverse }: Props) {
           reverse ? "md:mr-4" : "md:ml-4"
         } w-full md:w-1/2 lg:w-3/5 w-full relative flex items-end justify-end pb-10`}
       >
+        {/** BEGIN MOBILE DISPLAY **/}
         <div
           className={`${
             reverse ? "md:mr-4" : "md:ml-4"
-          } absolute transform -translate-x-10 translate-y-6 rounded-lg shadow-xl hover:shadow-3xl transition-colors bg-secondary border-secondary `}
+          } absolute transform -translate-x-10 translate-y-6 rounded-lg 
+          shadow-xl hover:shadow-3xl transition-colors bg-secondary border-secondary
+          flex flex-col items-center`}
           style={{
-            borderWidth: "14px 4px 20px 4px",
+            borderWidth: "14px 4px 8px 4px",
           }}
         >
           <div
@@ -61,15 +64,24 @@ function PortfolioBannerItem({ entry, reverse }: Props) {
               width: "220px",
             }}
           />
+          <div className="w-6 h-6 rounded-full bg-secondary-light shadow-lg mt-2" />
         </div>
+        {/** END MOBILE DISPLAY **/}
+
+        {/** BEGIN DESKTOP DISPLAY **/}
         <div
           className={`${
             reverse ? "md:mr-4" : "md:ml-4"
-          } w-full bg-primary rounded-lg shadow-xl hover:shadow-3xl transition-colors border-primary`}
+          } w-full bg-primary rounded-lg shadow-xl hover:shadow-3xl transition-colors border-primary
+          `}
           style={{
             borderWidth: "10px",
           }}
         >
+          <div className="flex space-x-1 pb-2 items-end">
+            <div className="w-3 h-3 rounded-full bg-secondary-light shadow-lg" />
+            <div className="w-3 h-3 rounded-full bg-secondary-light shadow-lg " />
+          </div>
           <div
             className="rounded-lg bg-cover  bg-top"
             style={{
@@ -79,6 +91,7 @@ function PortfolioBannerItem({ entry, reverse }: Props) {
           />
         </div>
       </div>
+      {/** END DESKTOP DISPLAY **/}
     </div>
   );
 }

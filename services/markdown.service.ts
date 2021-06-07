@@ -1,26 +1,27 @@
 import fs from "fs";
 import { join } from "path";
-import matter from "gray-matter";
-import dayjs from "dayjs";
+import * as matter from "gray-matter";
 
 const postsDirectory = join(process.cwd(), "_posts");
 const gistsDirectory = join(process.cwd(), "_gists");
 
-interface NavItem {
-  title: string;
-  slug: string;
-}
+type NavItem = Pick<IMarkdownPost, "title" | "slug">;
+
 export interface IMarkdownPost {
   title: string;
   slug: string;
   path: string;
   date: string;
+  author: string;
   content?: string;
   tags?: string[];
   nextPost?: NavItem;
   previousPost?: NavItem;
   image?: string;
   excerpt?: string;
+  subtitle?: string;
+  ogImage?: string;
+  coverImage?: string;
 }
 
 class MarkdownService {
@@ -54,10 +55,6 @@ class MarkdownService {
     return slugToPath;
   }
 
-  getPostPaths() {
-    return fs.readdirSync(this.directory);
-  }
-
   trimDate(path: string) {
     return path.slice(11, path.length);
   }
@@ -66,9 +63,9 @@ class MarkdownService {
     return slug.replace(/\.md$/, "");
   }
 
-  getPostBySlug(slug, fields = []): IMarkdownPost {
+  getPostBySlug(slug, fields: (keyof IMarkdownPost)[]): IMarkdownPost {
     // find matching
-    const foundPath = this.slugsToPaths[slug]
+    const foundPath = this.slugsToPaths[slug];
     // join pathname with directory
     const fullPath = join(this.directory, foundPath);
     // read file
@@ -95,39 +92,26 @@ class MarkdownService {
   }
 
   getPreviousAndNextPosts(slug: string) {
-    console.log('slug: ', slug)
-
-    const slugs = Object.keys(this.slugsToPaths)
-    console.log("slugs :", slugs);
-    const fieldsToGet = ["title"];
+    const slugs = Object.keys(this.slugsToPaths);
     const indexOfPost = slugs.indexOf(slug);
 
     const previousPost =
       indexOfPost > 0
-        ? this.getPostBySlug(slugs[indexOfPost - 1], fieldsToGet)
+        ? this.getPostBySlug(slugs[indexOfPost - 1], ["title"])
         : null;
     const nextPost =
       indexOfPost !== slugs.length - 1
-        ? this.getPostBySlug(slugs[indexOfPost + 1], fieldsToGet)
+        ? this.getPostBySlug(slugs[indexOfPost + 1], ["title"])
         : null;
 
     return { previousPost, nextPost };
   }
 
-  getAllPosts(fields = []) {
-    console.log(this.slugsToPaths);
-    console.log(this.pathsToSlugs);
-    // const slugs = this.getPostPaths().map((i) => this.trimDate(i));
-    const slugs = Object.values(this.pathsToSlugs)
-    return (
-      slugs
-        .map((slug) => this.getPostBySlug(slug, fields))
-        // sort posts by date in descending order
-        // @ts-ignore
-        .sort((post1, post2) =>
-          dayjs(post1.date) > dayjs(post2.date) ? -1 : 1
-        )
-    );
+  getAllPosts(fields: (keyof IMarkdownPost)[]) {
+    // reverse to get newest first
+    const slugs = Object.values(this.pathsToSlugs).reverse();
+
+    return slugs.map((slug) => this.getPostBySlug(slug, fields));
   }
 
   getPostList() {

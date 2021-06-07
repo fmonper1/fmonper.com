@@ -26,6 +26,41 @@ export default function PostPage({ post, headings }) {
 
   const [openToc, setOpenToc] = useState<boolean>(true);
 
+  const TOC = () => (
+    <div className="flex">
+      <div className="p-3 bg-white rounded-md mb-8">
+        <div className="flex items-center">
+          <Title size={2} className="text-lg">
+            Table of Contents
+          </Title>
+
+          <Button
+            size="xs"
+            className="ml-4"
+            onClick={() => setOpenToc((open) => !open)}
+          >
+            <Icon path={openToc ? mdiMinus : mdiPlus} size={1} />
+          </Button>
+        </div>
+        <div
+          className={clsx(
+            "transform transition-all",
+            !openToc && "scale-y-0 max-h-0"
+          )}
+        >
+          <div className="border-t border-secondary my-2" />
+          <ul>
+            {headings.map((item) => (
+              <li style={{ paddingLeft: `${(item.level - 2) * 24}px` }}>
+                <a href={`#${item.slug}`}>{item.text}</a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </div>
+  );
+
   return (
     <>
       <Head>
@@ -36,36 +71,9 @@ export default function PostPage({ post, headings }) {
         <TransparentHero title={post?.title} subtitle={post?.subtitle} />
 
         <PageContainer className="my-8" size="narrow">
-          <div className="flex">
-            <div className="p-3 bg-white rounded-md mb-8">
-              <div className="flex items-center">
-                <Title size={2} className="text-lg">
-                  Table of Contents
-                </Title>
+          {/* START TABLE OF CONTENTS */}
 
-                <Button
-                  size="xs"
-                  className="ml-4"
-                  onClick={() => setOpenToc((open) => !open)}
-                >
-                  <Icon path={openToc ? mdiMinus : mdiPlus} size={1} />
-                </Button>
-              </div>
-              <div
-                className={clsx(
-                  "transform transition-all",
-                  !openToc && "scale-y-0 max-h-0",
-                )}
-              >
-                <div className="border-t border-secondary my-2"/>
-                {headings.map((item) => (
-                  <div style={{ paddingLeft: `${(item.level - 2) * 24}px` }}>
-                    <a href={`#${item.slug}`}>{item.text}</a>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
+          <TOC />
           <div
             id="post-entry"
             className="space-y-5"
@@ -85,7 +93,10 @@ export default function PostPage({ post, headings }) {
             </div>
           </div>
 
-          <div className="my-8 flex items-center justify-center flex-wrap space-y-2 md:space-y-0">
+          <div
+            id="post-navigation"
+            className="my-8 flex items-center justify-center flex-wrap space-y-2 md:space-y-0"
+          >
             <div
               className="w-full md:w-auto group"
               style={{ minWidth: "270px" }}

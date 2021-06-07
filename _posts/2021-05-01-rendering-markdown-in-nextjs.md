@@ -1,205 +1,210 @@
 ---
-title: 'Rendering markdown in Next.js'
-subtitle: 'Long live the JAMStack'
-date: '2020-03-16T05:35:07.322Z'
+title: Rendering markdown in Next.js
+subtitle: Long live the JAMStack
 tags:
 - react
 - markdown
-excerpt: 'Creating static websites has never been easier. Find out how to render markdown from any headless CMS or your file system inside your React components.'
+excerpt: Creating static websites has never been easier. Find out how to render markdown from any headless CMS or your file system inside your React components
 ---
+ 
+This entry outlines the code I used to render my markdown blog with Nextjs. 
 
-Creating static websites has never been easier. The JAMStack has made it very easy to create complex static websites utilizing the power of Markup.
+## Setup
 
-## Writing content in Markdown
-For quite some time I've used Vuepress to create simple static websites, but I use React on a day-to-day basis, so ultimately I decided to integrate markdown content into my NextJS projects.
+I use Nextjs to generate static sites and host them on Netlify. 
+To render posts I need to scan different folders during the build process to find the content for the entries.
 
-### Assumptions
-This article assumes that you can access a piece of Markdown text from your front-end. This can be done though a headless CMS or your own file-system. I will be using ContentfulCMS.
+I also need a library to parse the .md files and get the HTML to be rendered.
 
-## Rendering Markdown in NextJS
-We will make use of a couple nifty packages to transform our Markdown into sanitized HTML.
+## The parser
 
-### Marked.js
-Marked.js is "a low-level markdown compiler for parsing markdown without caching or blocking for long periods of time". It takes in a String of Markdown and returns us a string of HTML.
-
-```shell
-$ yarn add marked
-```
-
-Once marked is installed we can go on a import the following
-
-```jsx
-import marked from "marked";
-```
-
-We can the setup then initiate a simple renderer.
-
-```jsx
-const [html, setHtml] = useState("");
-useEffect(() => {
-  const renderer = ({
-    link(href, title, text) {
-      return renderToString(
-        <Link href={href}>
-          <a
-            href={href}
-            className="inline-flex items-end text-primary-main underline"
-          >
-            {text}
-          </a>
-        </Link>
-      );
-    },
-    heading(text, level) {
-      const escapedText = text.toLowerCase().replace(/[^\w]+/g, "-");
-      return renderToString(
-        <Title size={level}>
-          <>
-            <a className="anchor" href={`#${escapedText}`}>
-              <span className="mr-2">#</span>
-            </a>
-            {text}
-          </>
-        </Title>
-      );
-    },
-  });
-  marked.use({ renderer });
-  setHtml(marked(markdwonInVariable));
-}, []);
-
-```
-This simple configuration allow us to modifyu the link `<a></a>` and heading `<hX></hX>` tags. Notice how I am using the `renderToString`function. This will alow us to use React components insted of plain HTML tags.
-
-Based on your use case you might not need this, so you just can just use plain old HTML with template literals.
-
-```jsx
-...
-link(href, title, text) {
-  return `
-      <a
-        href="${href}"
-        className="inline-flex items-end text-primary-main underline"
-      >
-        ${text}
-      </a>
-  `;
-},
-...
-```
-
-Now that we have our HTML saved on a state, we can setItDangerousely ;)
-```jsx
-<div
-  id="post-entry"
-  dangerouslySetInnerHTML={{
-    __html: html,
-  }}
-/>
-```
-
-### DOMPurifier
-If we are going to use the `dangerouslySetInnerHTML` prop we will want to be sure that our content has been previously sanitized. To do this we will use DOMPurifier, "a DOM-only, super-fast, uber-tolerant XSS sanitizer for HTML, MathML and SVG."
-
-```shell
-$ yarn add dompurify
-```
-
-Now we can import the package and sanitize the HTML returned by Marked
-
-```jsx
-import DOMPurify from "dompurify";
-...
-setHtml(DOMPurify.sanitize(marked(markdwonInVariable)));
-```
-
-Our HTML will now be safe to insert into our page.
-
-### Syntax highlighting
-We can also apply syntax highlighting to the code written inside our Markdown. For this we will be using [Prism](https://prismjs.com/) which is a battle-tested syntax highligter for the web.
-
-Lets add it to our project.
-```shell
-$ yarn add prism
-```
-Now we can import it in our controller and use the `highlightAll()` method  to convert our `<pre></pre>` and `<code></code>` tags into highlighted text.
-
-```jsx
-import * as prism from "prismjs";
-...
-useEffect(() => {
-  if (html === "") return;
-  prism.highlightAll();
-}, [html]);
-```
-
-## Creating a useMarkdown() hook
-We might have different pages where we want to render Markup so we want to be able to reuse the code for parsing Markdown. To achieve this we can create our own `useMarkdown()` hook.
-
-```jsx
-import React, { useEffect, useState } from "react";
-import marked from "marked";
+```tsx
+import marked, { Renderer } from "marked";
 import { renderToString } from "react-dom/server";
 import Link from "next/link";
 import Icon from "@mdi/react";
 import { mdiOpenInNew } from "@mdi/js";
 import Title from "@components/atoms/Title";
-import * as prism from "prismjs";
-import DOMPurify from "dompurify";
+import React from "react";
 
-const useMarkdown = (markdown) => {
-  const [html, setHtml] = useState("");
-  useEffect(() => {
-    const renderer = ({
-      link(href, title, text) {
-        return renderToString(
-          <Link href={href}>
-            <a
-              href={href}
-              className="inline-flex items-end text-primary-main underline"
-            >
-              {text}
-            </a>
-          </Link>
-        );
-      },
-      heading(text, level) {
-        const escapedText = text.toLowerCase().replace(/[^\w]+/g, "-");
-        return renderToString(
-          <Title size={level}>
-            <>
-              <a className="anchor" href={`#${escapedText}`}>
-                <span className="mr-2">#</span>
+const MarkdownParser = {
+  parse(markdown: string) {
+    const headings = [];
+
+    marked.use({
+      // @ts-ignore
+      renderer: {
+        link(href, title, text) {
+          return renderToString(
+            <Link href={href}>
+              <a
+                href={href}
+                className="inline-flex items-end text-primary-main underline"
+              >
+                {text}
+                <Icon path={mdiOpenInNew} size={0.75} />
               </a>
-              {text}
-            </>
-          </Title>
-        );
+            </Link>
+          );
+        },
+        heading(text, level) {
+          const escapedText = text.toLowerCase().replace(/[^\w]+/g, "-");
+          headings.push({ text, slug: escapedText, level });
+          return renderToString(
+            <Title size={level} className={level <= 2 ? "pt-3" : ""}>
+              <a className="anchor" href={`#${escapedText}`} id={escapedText}>
+                <span className="mr-2">#</span>
+                {text}
+              </a>
+            </Title>
+          );
+        },
+        code(code, language) {
+          return renderToString(
+            <div>
+              <div className="codeblock-lang text-sm font-bold p-2 px-4 bg-secondary-main -mb-0 flex">
+                {language}
+              </div>
+              <pre className={`language-${language} mt-0`}>
+                <code className={`language-${language}`}>{code}</code>
+              </pre>
+            </div>
+          );
+        },
       },
     });
-    marked.use({ renderer });
-    setHtml(DOMPurify.sanitize(marked(markdown)));
-  }, []);
-  useEffect(() => {
-    if (html === "") return;
-    prism.highlightAll();
-  }, [html]);
-
-  return html;
+    return { data: marked(markdown), headings };
+  },
 };
 
-export default useMarkdown;
+export default MarkdownParser;
 ```
 
-Now we can import and use our hook in all of our components:
 
-```jsx
-const html = useMarkdown(post.fields.body);
-...
-<div
-  id="post-entry"
-  dangerouslySetInnerHTML={{
-    __html: html,
-  }}
-/>
+## The service
+
+```ts
+import fs from "fs";
+import { join } from "path";
+import matter from "gray-matter";
+
+const postsDirectory = join(process.cwd(), "_posts");
+const gistsDirectory = join(process.cwd(), "_gists");
+
+type NavItem = Pick<IMarkdownPost, "title" | "slug">;
+
+export interface IMarkdownPost {
+  title: string;
+  slug: string;
+  path: string;
+  date: string;
+  author: string;
+  content?: string;
+  tags?: string[];
+  nextPost?: NavItem;
+  previousPost?: NavItem;
+  image?: string;
+  excerpt?: string;
+  subtitle?: string;
+  ogImage?: string;
+  coverImage?: string;
+}
+
+class MarkdownService {
+  readonly directory;
+  readonly pathsToSlugs;
+  readonly slugsToPaths;
+
+  constructor(directory: string) {
+    this.directory = directory;
+    this.pathsToSlugs = this.getPathsToSlugs();
+    this.slugsToPaths = this.getSlugsToPaths();
+  }
+
+  /**
+   * Instead of complex filtering, map slugs to filesystem paths and
+   * access an object by its key
+   */
+  private getPathsToSlugs() {
+    const pathToSlug = {};
+    fs.readdirSync(this.directory).map(
+      (item) => (pathToSlug[item] = this.trimDate(this.replaceExtension(item)))
+    );
+    return pathToSlug;
+  }
+
+  private getSlugsToPaths() {
+    const slugToPath = {};
+    fs.readdirSync(this.directory).map(
+      (item) => (slugToPath[this.trimDate(this.replaceExtension(item))] = item)
+    );
+    return slugToPath;
+  }
+
+  trimDate(path: string) {
+    return path.slice(11, path.length);
+  }
+
+  replaceExtension(slug: string) {
+    return slug.replace(/\.md$/, "");
+  }
+
+  getPostBySlug(slug, fields: (keyof IMarkdownPost)[]): IMarkdownPost {
+    // find matching
+    const foundPath = this.slugsToPaths[slug];
+    // join pathname with directory
+    const fullPath = join(this.directory, foundPath);
+    // read file
+    const fileContents = fs.readFileSync(fullPath, "utf8");
+
+    const { data, content } = matter(fileContents);
+
+    const items = {
+      slug: slug,
+      path: foundPath,
+    };
+
+    fields.forEach((field) => {
+      if (field === "slug") return;
+      if (field === "path") return;
+      if (field === "content") items[field] = content;
+
+      if (data[field]) items[field] = data[field];
+    });
+
+    return {
+      ...items,
+    } as IMarkdownPost;
+  }
+
+  getPreviousAndNextPosts(slug: string) {
+    const slugs = Object.keys(this.slugsToPaths);
+    const indexOfPost = slugs.indexOf(slug);
+
+    const previousPost =
+      indexOfPost > 0
+        ? this.getPostBySlug(slugs[indexOfPost - 1], ["title"])
+        : null;
+    const nextPost =
+      indexOfPost !== slugs.length - 1
+        ? this.getPostBySlug(slugs[indexOfPost + 1], ["title"])
+        : null;
+
+    return { previousPost, nextPost };
+  }
+
+  getAllPosts(fields: (keyof IMarkdownPost)[]) {
+    // reverse to get newest first
+    const slugs = Object.values(this.pathsToSlugs).reverse();
+
+    return slugs.map((slug) => this.getPostBySlug(slug, fields));
+  }
+
+  getPostList() {
+    return this.getAllPosts(["title", "author", "tags", "excerpt"]);
+  }
+}
+
+export const GistsService = new MarkdownService(gistsDirectory);
+export const PostsService = new MarkdownService(postsDirectory);
 ```

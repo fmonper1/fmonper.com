@@ -3,6 +3,7 @@ import PageContainer from "./PageContainer";
 
 import Icon from "@mdi/react";
 import { mdiGithub } from "@mdi/js";
+import clsx from "clsx";
 
 const Footer = () => {
   const columnStyle = ` w-full md:w-1/3 flex`;
@@ -15,15 +16,32 @@ const Footer = () => {
           </div>
 
           <div className={columnStyle}>
-            <div>fmonper.com 2021</div>
+            <div>
+              <ul className="space-y-4">
+                <li>
+                  <a href="blog">home</a>
+                </li>
+                <li>
+                  <a href="blog">blog</a>
+                </li>
+                <li>
+                  <a href="blog">projects</a>
+                </li>
+              </ul>
+            </div>
           </div>
-          <div className={columnStyle}>
-            <p>
-              Built with NextJS + Contentful -{" "}
-              <span className="inline-flex">
-                <Icon path={mdiGithub} size={1} /> Repo
-              </span>
-            </p>
+          <div className={clsx(columnStyle, "flex flex-col space-y-4")}>
+            <div>Built with NextJS + Contentful</div>
+            <div>
+              <a
+                href="https://github.com/fmonper1/fmonper.com-nextjs"
+                target="_blank"
+              >
+                <span className="inline-flex">
+                  <Icon path={mdiGithub} size={1} /> Repo
+                </span>
+              </a>
+            </div>
           </div>
         </div>
       </PageContainer>

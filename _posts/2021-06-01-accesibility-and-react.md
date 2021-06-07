@@ -1,16 +1,18 @@
 ---
-title: 'Accessibility and React'
-subtitle: 'Must support all the users'
-date: '2020-03-16T05:35:07.322Z'
+title: Accessibility and React
+subtitle: Must support all the users
 tags:
 - a11y
-- react
-excerpt: ''
+excerpt: This post serves as compilation of tools, articles and findings made whilst optimizing production React applications
 ---
 
-KLK
+This post serves as compilation of tools, articles and findings I've made whilst optimizing production React applications.
+
+## Articles
+test
 
 ## Tools
 
-- klk
-- other
+- [tota11y](https://khan.github.io/tota11y/)
+
+asd

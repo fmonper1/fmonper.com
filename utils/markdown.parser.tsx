@@ -30,9 +30,11 @@ const MarkdownParser = {
           const escapedText = text.toLowerCase().replace(/[^\w]+/g, "-");
           headings.push({ text, slug: escapedText, level });
           return renderToString(
-            <Title size={level} className={level <= 2 ? "pt-3" : ""}>
+            <Title size={level} className={`${level <= 2 ? "pt-3" : ""} group`}>
               <a className="anchor" href={`#${escapedText}`} id={escapedText}>
-                <span className="mr-2">#</span>
+                <span className="mr-2 absolute -ml-5 hidden group-hover:block">
+                  #
+                </span>
                 {text}
               </a>
             </Title>

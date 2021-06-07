@@ -10,7 +10,7 @@ interface Props {
 }
 
 function PostMD({ entry }: Props) {
-  const tag = entry.tags[0];
+  const tag = entry?.tags ? entry?.tags[0] : undefined;
 
   return (
     <Card>
