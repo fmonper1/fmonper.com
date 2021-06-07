@@ -1,9 +1,10 @@
 import Head from "next/head";
-import PostsService from "../../services/posts.service";
 import Post from "@components/posts/Post";
 import { GetStaticProps } from "next";
 import PageContainer from "@components/template/PageContainer";
 import TransparentHero from "@components/template/hero/TransparentHero";
+import { PostsService } from "../../services/markdown.service";
+import PostMD from "@components/posts/PostMD";
 
 export default function Blog({ posts }) {
   return (
@@ -20,14 +21,7 @@ export default function Blog({ posts }) {
         <div className="space-y-4">
           {posts.map((entry) => {
             const p = entry.fields;
-            return (
-              <Post
-                entry={entry}
-                key={entry.sys.id}
-                image={p.image?.fields}
-                title={p.title}
-              />
-            );
+            return <PostMD entry={entry} />;
           })}
         </div>
       </PageContainer>
@@ -36,7 +30,7 @@ export default function Blog({ posts }) {
 }
 
 export const getStaticProps: GetStaticProps = async () => {
-  const res = await PostsService.fetchEntries();
+  const res = await PostsService.getPostList();
 
   return {
     props: {

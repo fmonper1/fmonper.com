@@ -1,5 +1,4 @@
 import Head from "next/head";
-import PostsService from "../services/posts.service";
 import { GetStaticProps } from "next";
 import Link from "next/link";
 import PageContainer from "@components/template/PageContainer";
@@ -8,18 +7,20 @@ import TransparentHero from "@components/template/hero/TransparentHero";
 import Button from "@components/atoms/Button";
 import Icon from "@mdi/react";
 import { mdiGithub, mdiLinkedin } from "@mdi/js";
-import PortfolioService from "../services/portfolio.service";
 import PostList from "@components/sections/index/PostList";
 import CardSection from "@components/sections/index/CardSection";
 import PortfolioList from "@components/sections/index/PortfoliotList";
 import GistList from "@components/sections/index/GistList";
 import {
-  GistsService,
+  GistsService, PostsService,
   PostsService as MDPostsService,
 } from "../services/markdown.service";
+import PortfolioService from "../services/portfolio.service";
 import GithubService from "../services/github.service";
 import React from "react";
 import RepoList from "@components/sections/index/RepoList";
+import AboutMeSection from "@components/sections/index/AboutMe";
+import FadeIn from "@components/atoms/FadeIn";
 
 export default function Home({ posts, gists, portfolio, repos }) {
   return (
@@ -56,20 +57,26 @@ export default function Home({ posts, gists, portfolio, repos }) {
           </div>
         </TransparentHero>
         <PageContainer>
-          <CardSection />
+          <FadeIn>
+            <CardSection />
+          </FadeIn>
         </PageContainer>
         <PageContainer>
-          <PostList posts={posts} />
-        </PageContainer>{" "}
+          <FadeIn>
+            <PostList posts={posts} />
+          </FadeIn>
+        </PageContainer>
         <PageContainer>
-          <div className="space-y-10 md:space-y-0 md:space-x-4 flex flex-wrap md:flex-nowrap">
-            <div className="w-full md:w-1/2 ">
-              <GistList gists={gists} />
+          <FadeIn>
+            <div className="space-y-10 md:space-y-0 md:space-x-4 flex flex-wrap md:flex-nowrap">
+              <div className="w-full md:w-1/2 ">
+                <GistList gists={gists} />
+              </div>
+              <div className="w-full md:w-1/2 ">
+                <RepoList repos={repos} />
+              </div>
             </div>
-            <div className="w-full md:w-1/2 ">
-              <RepoList repos={repos} />
-            </div>
-          </div>
+          </FadeIn>
         </PageContainer>
         <PageContainer>
           <PortfolioList items={portfolio} />
@@ -80,10 +87,10 @@ export default function Home({ posts, gists, portfolio, repos }) {
 }
 
 export const getStaticProps: GetStaticProps = async () => {
-  const posts = await PostsService.fetchEntries();
+  const posts = await PostsService.getPostList();
   const gists = await GistsService.getPostList();
   // const posts = await MDPostsService.getPostList();
-  const portfolio = await PortfolioService.fetchEntries();
+  const portfolio = PortfolioService;
   const repos = await GithubService.getRepos();
 
   return {

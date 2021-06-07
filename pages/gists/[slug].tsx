@@ -121,12 +121,13 @@ export async function getStaticProps({ params }) {
   ]);
 
   const postNavigation = GistsService.getPreviousAndNextPosts(params.slug);
+  const { data, headings } = MarkdownParser.parse(post.content);
   return {
     props: {
       post: {
         ...post,
         ...postNavigation,
-        content: MarkdownParser.parse(post.content),
+        content: data,
       },
     },
   };

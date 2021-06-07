@@ -4,18 +4,62 @@ import TransparentHero from "@components/template/hero/TransparentHero";
 import PageContainer from "@components/template/PageContainer";
 import Title from "@components/atoms/Title";
 import Button from "@components/atoms/Button";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import MarkdownParser from "@utils/markdown.parser";
 import * as prism from "prismjs";
 import Icon from "@mdi/react";
-import { mdiArrowLeftBold, mdiArrowRightBold, mdiHome } from "@mdi/js";
+import {
+  mdiArrowLeftBold,
+  mdiArrowRightBold,
+  mdiHome,
+  mdiMinus,
+  mdiPlus,
+} from "@mdi/js";
 import Link from "next/link";
+import clsx from "clsx";
 
-export default function PostPage({ post }) {
+export default function PostPage({ post, headings }) {
   // const html = useMarkdown(post.content);
   useEffect(() => {
     prism.highlightAll();
   }, [post]);
+
+  const [openToc, setOpenToc] = useState<boolean>(true);
+
+  const TOC = () => (
+    <div className="flex">
+      <div className="p-3 bg-white rounded-md mb-8">
+        <div className="flex items-center">
+          <Title size={2} className="text-lg">
+            Table of Contents
+          </Title>
+
+          <Button
+            size="xs"
+            className="ml-4"
+            onClick={() => setOpenToc((open) => !open)}
+          >
+            <Icon path={openToc ? mdiMinus : mdiPlus} size={1} />
+          </Button>
+        </div>
+        <div
+          className={clsx(
+            "transform transition-all",
+            !openToc && "scale-y-0 max-h-0"
+          )}
+        >
+          <div className="border-t border-secondary my-2" />
+          <ul>
+            {headings.map((item) => (
+              <li style={{ paddingLeft: `${(item.level - 2) * 24}px` }}>
+                <a href={`#${item.slug}`}>{item.text}</a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </div>
+  );
 
   return (
     <>
@@ -26,7 +70,10 @@ export default function PostPage({ post }) {
       <main>
         <TransparentHero title={post?.title} subtitle={post?.subtitle} />
 
-        <PageContainer className="my-8">
+        <PageContainer className="my-8" size="narrow">
+          {/* START TABLE OF CONTENTS */}
+
+          <TOC />
           <div
             id="post-entry"
             className="space-y-5"
@@ -46,14 +93,17 @@ export default function PostPage({ post }) {
             </div>
           </div>
 
-          <div className="my-8 flex items-center justify-center flex-wrap space-y-2 md:space-y-0">
+          <div
+            id="post-navigation"
+            className="my-8 flex items-center justify-center flex-wrap space-y-2 md:space-y-0"
+          >
             <div
               className="w-full md:w-auto group"
               style={{ minWidth: "270px" }}
             >
               {post?.previousPost && (
-                <Link href={`/entries/${post?.previousPost.slug}`}>
-                  <a href={`/entries/${post?.previousPost.slug}`}>
+                <Link href={`/blog/${post?.previousPost.slug}`}>
+                  <a href={`/blog/${post?.previousPost.slug}`}>
                     <div className="flex w-full justify-between bg-primary p-2 hover:bg-primary-light transition transition-colors">
                       <Icon
                         path={mdiArrowLeftBold}
@@ -83,8 +133,8 @@ export default function PostPage({ post }) {
             </div>
             <div className="w-full md:w-auto" style={{ minWidth: "270px" }}>
               {post?.nextPost && (
-                <Link href={`/entries/${post?.nextPost.slug}`}>
-                  <a href={`/entries/${post?.nextPost.slug}`}>
+                <Link href={`/blog/${post?.nextPost.slug}`}>
+                  <a href={`/blog/${post?.nextPost.slug}`}>
                     <div className="group flex w-full justify-between bg-primary p-2 hover:bg-primary-light transition transition-colors">
                       <div className="text-white flex items-center px-2">
                         {post?.nextPost.title}
@@ -111,6 +161,7 @@ export default function PostPage({ post }) {
 export async function getStaticProps({ params }) {
   const post = PostsService.getPostBySlug(params.slug, [
     "title",
+    "subtitle",
     "date",
     "slug",
     "author",
@@ -122,13 +173,15 @@ export async function getStaticProps({ params }) {
   ]);
 
   const postNavigation = PostsService.getPreviousAndNextPosts(params.slug);
+  const { data, headings } = MarkdownParser.parse(post.content);
   return {
     props: {
       post: {
         ...post,
         ...postNavigation,
-        content: MarkdownParser.parse(post.content),
+        content: data,
       },
+      headings,
     },
   };
 }

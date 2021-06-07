@@ -1,14 +1,18 @@
-import React from 'react'
+import React from "react";
 interface Props {
-  children
-  className?
+  children: React.ReactNode;
+  className?: string;
+  size?: "default" | "narrow";
 }
-const PageContainer = ({ children, className }: Props) => {
+const PageContainer = ({ children, className, size = "default" }: Props) => {
   return (
-    <div className={`mx-auto p-4 ${className}`} style={{ maxWidth: '1100PX' }}>
+    <div
+      className={`mx-auto p-4 ${className}`}
+      style={{ maxWidth: size === "narrow" ? "800px" : "1100PX" }}
+    >
       {children}
     </div>
-  )
-}
+  );
+};
 
-export default PageContainer
+export default PageContainer;
