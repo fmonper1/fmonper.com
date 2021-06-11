@@ -14,7 +14,6 @@ interface LinkProps {
 const Navbar = () => {
   const { pathname } = useRouter();
   const MyLink = ({ href, children, className, ...props }: LinkProps) => {
-    console.log(pathname === href, pathname, href);
     return (
       <Link href={href}>
         <a
