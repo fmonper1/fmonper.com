@@ -17,6 +17,7 @@ import {
 } from "@mdi/js";
 import Link from "next/link";
 import clsx from "clsx";
+import LinkButton from "@components/atoms/button/LinkButton";
 
 export default function PostPage({ post, headings }) {
   // const html = useMarkdown(post.content);
@@ -50,8 +51,8 @@ export default function PostPage({ post, headings }) {
         >
           <div className="border-t border-secondary my-2" />
           <ul>
-            {headings.map((item) => (
-              <li style={{ paddingLeft: `${(item.level - 2) * 24}px` }}>
+            {headings.map((item, i) => (
+              <li style={{ paddingLeft: `${(item.level - 2) * 24}px` }} key={i}>
                 <a href={`#${item.slug}`}>{item.text}</a>
               </li>
             ))}
@@ -86,9 +87,9 @@ export default function PostPage({ post, headings }) {
             <Title size={3}>Tags</Title>
             <div className="flex space-x-2 flex-wrap ">
               {post?.tags?.map((tag, i) => (
-                <Button key={i} className="my-2">
+                <LinkButton href="#" key={i} className="my-2">
                   {tag}
-                </Button>
+                </LinkButton>
               ))}
             </div>
           </div>
