@@ -1,15 +1,26 @@
 import React from "react";
+import clsx from "clsx";
 
-interface Props {
-  size: number;
+type TitleProps = {
+  size: 1 | 2 | 3 | 4 | 5;
   className?: string;
   children: any;
-  color?: any;
-  [props: string]: any;
-}
+  color?: "primary" | "secondary" | string;
+};
 
-const Title = ({ size, className, children, color, ...props }: Props) => {
-  const baseCss = `${color ?? "text-primary-main"} `;
+const Title: React.FC<TitleProps> = ({
+  size,
+  className,
+  children,
+  color = "primary",
+  ...props
+}) => {
+  const baseCss = clsx(
+    color === "primary" && "text-primary-main",
+    color === "secondary" && "text-secondary-main",
+    color && color !== "primary" && color !== "secondary" && color
+  );
+
   switch (size) {
     case 1:
       return (

@@ -34,7 +34,7 @@ const GistList = ({ gists }) => {
             <Link href={`gists/${entry.slug}`}>
               <a href={`gists/${entry.slug}`}>
                 <div className="flex items-center">
-                  <div className="mr-3 transition-colors bg-primary-main group-hover:bg-secondary text-white m-1 rounded-sm">
+                  <div className="mr-3 transition-colors bg-primary-main group-hover:bg-secondary text-white group-focus:text-secondary m-1 rounded-sm">
                     <div className="rounded-sm text-sm p-1">
                       <Icon path={getIcon(entry.tags[0])} size={0.85} />
                     </div>

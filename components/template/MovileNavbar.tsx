@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import Link from "next/link";
 import Icon from "@mdi/react";
 import { mdiBlogger, mdiBriefcase, mdiClose, mdiHome } from "@mdi/js";
-import Button from "../atoms/Button";
+import Button from "../atoms/button/Button";
 import FadeIn from "@components/atoms/FadeIn";
 
 interface LinkProps {

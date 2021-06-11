@@ -1,7 +1,8 @@
 import Title from "@components/atoms/Title";
 import React from "react";
-import Button from "@components/atoms/Button";
+import Button from "@components/atoms/button/Button";
 import Link from "next/link";
+import LinkButton from "@components/atoms/button/LinkButton";
 
 interface Props {
   entry: any;
@@ -30,13 +31,7 @@ function PortfolioBannerItem({ entry, reverse }: Props) {
             </p>
           )}
           <div className="flex box">
-            {previewUrl && (
-              <Link href={previewUrl}>
-                <a href={previewUrl}>
-                  <Button style="primary">Preview</Button>
-                </a>
-              </Link>
-            )}
+            {previewUrl && <LinkButton href={previewUrl}>Preview</LinkButton>}
           </div>
         </div>
       </div>

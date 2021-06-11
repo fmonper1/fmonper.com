@@ -4,7 +4,7 @@ import Link from "next/link";
 import PageContainer from "@components/template/PageContainer";
 import Title from "@components/atoms/Title";
 import TransparentHero from "@components/template/hero/TransparentHero";
-import Button from "@components/atoms/Button";
+import Button from "@components/atoms/button/Button";
 import Icon from "@mdi/react";
 import { mdiGithub, mdiLinkedin } from "@mdi/js";
 import PostList from "@components/sections/index/PostList";
@@ -12,7 +12,8 @@ import CardSection from "@components/sections/index/CardSection";
 import PortfolioList from "@components/sections/index/PortfoliotList";
 import GistList from "@components/sections/index/GistList";
 import {
-  GistsService, PostsService,
+  GistsService,
+  PostsService,
   PostsService as MDPostsService,
 } from "../services/markdown.service";
 import PortfolioService from "../services/portfolio.service";
@@ -21,6 +22,7 @@ import React from "react";
 import RepoList from "@components/sections/index/RepoList";
 import AboutMeSection from "@components/sections/index/AboutMe";
 import FadeIn from "@components/atoms/FadeIn";
+import LinkButton from "@components/atoms/button/LinkButton";
 
 export default function Home({ posts, gists, portfolio, repos }) {
   return (
@@ -39,21 +41,13 @@ export default function Home({ posts, gists, portfolio, repos }) {
             and <span className="text-secondary-main">full-stack</span>{" "}
             developer.
           </Title>
-          <div className="mb-8 flex">
-            <Link href="https://www.linkedin.com/in/fmonper1/">
-              <a href="https://www.linkedin.com/in/fmonper1/">
-                <Button className="flex mr-4">
-                  <Icon path={mdiLinkedin} size={1} className="mr-2" /> LinkedIn
-                </Button>
-              </a>
-            </Link>
-            <Link href="https://www.github.com/fmonper1/">
-              <a href="https://www.github.com/fmonper1/">
-                <Button style="link" className="flex">
-                  <Icon path={mdiGithub} size={1} className="mr-2" /> Github
-                </Button>
-              </a>
-            </Link>
+          <div className="mb-8 flex space-x-4">
+            <LinkButton href="https://www.linkedin.com/in/fmonper1/">
+              <Icon path={mdiLinkedin} size={1} className="mr-2" /> LinkedIn
+            </LinkButton>
+            <LinkButton href="https://www.github.com/fmonper1/">
+              <Icon path={mdiGithub} size={1} className="mr-2" /> Github
+            </LinkButton>
           </div>
         </TransparentHero>
         <PageContainer>

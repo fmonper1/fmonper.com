@@ -1,9 +1,9 @@
-import { GistsService, PostsService } from "../../services/markdown.service";
+import { PostsService } from "../../services/markdown.service";
 import Head from "next/head";
 import TransparentHero from "@components/template/hero/TransparentHero";
 import PageContainer from "@components/template/PageContainer";
 import Title from "@components/atoms/Title";
-import Button from "@components/atoms/Button";
+import Button from "@components/atoms/button/Button";
 import React, { useEffect, useState } from "react";
 import MarkdownParser from "@utils/markdown.parser";
 import * as prism from "prismjs";

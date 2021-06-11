@@ -1,7 +1,7 @@
 import React from "react";
 import Card from "@components/cards/Card";
 import Title from "@components/atoms/Title";
-import Button from "@components/atoms/Button";
+import Button from "@components/atoms/button/Button";
 import Link from "next/link";
 
 const CardSection = (props) => {
