@@ -12,7 +12,7 @@ interface LinkProps {
 const MyLink = ({ href, children, className, ...props }: LinkProps) => (
   <Link href={href}>
     <a
-      className={`text-white p-2 flex rounded-md transition-colors hover:bg-primary-light space-x-2 ${className}`}
+      className={`text-white p-2 flex rounded-md transition-colors hover:bg-primary-light focus:bg-primary-light space-x-2 ${className}`}
       {...props}
       href={href}
     >
