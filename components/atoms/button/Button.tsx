@@ -1,6 +1,7 @@
 import React from "react";
 import { ButtonProps } from "@components/atoms/button/Button.props";
 import { buttonStyles } from "@components/atoms/button/Button.styles";
+import clsx from "clsx";
 
 const Button: React.FC<ButtonProps & { onClick?: (any) => void }> = ({
   children,
@@ -12,7 +13,7 @@ const Button: React.FC<ButtonProps & { onClick?: (any) => void }> = ({
 }) => {
   const classNames = buttonStyles({ style, size });
   return (
-    <button className={classNames} {...props}>
+    <button className={clsx(classNames, className && className)} {...props}>
       {children}
     </button>
   );
