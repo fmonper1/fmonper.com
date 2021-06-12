@@ -9,7 +9,7 @@ interface Props {
   entry: IMarkdownPost;
 }
 
-function PostMD({ entry }: Props) {
+function MarkdownPost({ entry }: Props) {
   const tag = entry?.tags ? entry?.tags[0] : undefined;
 
   return (
@@ -51,4 +51,4 @@ function PostMD({ entry }: Props) {
   );
 }
 
-export default PostMD;
+export default MarkdownPost;
