@@ -1,8 +1,7 @@
 import React from "react";
 import Title from "@components/atoms/Title";
-import Post from "@components/posts/Post";
 import Divider from "@components/atoms/Divider";
-import PostMD from "@components/posts/PostMD";
+import MarkdownPost from "@components/posts/MarkdownPost";
 
 const PostList = ({ posts }) => {
   return (
@@ -17,10 +16,9 @@ const PostList = ({ posts }) => {
         Stuff I've written
       </Title>
       <div className="space-y-4 ">
-          {posts.map((entry) => {
-              const p = entry.fields;
-              return <PostMD entry={entry} />;
-          })}
+        {posts.map((entry, i) => (
+          <MarkdownPost entry={entry} key={i} />
+        ))}
       </div>
     </>
   );

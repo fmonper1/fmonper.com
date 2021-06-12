@@ -1,9 +1,7 @@
-import React, { useEffect } from "react";
+import React from "react";
 import Link from "next/link";
 import Icon from "@mdi/react";
-import { mdiBlogger, mdiBriefcase, mdiClose, mdiHome } from "@mdi/js";
-import Button from "../atoms/button/Button";
-import FadeIn from "@components/atoms/FadeIn";
+import { mdiBlogger, mdiBriefcase, mdiCodeBraces, mdiHome } from "@mdi/js";
 
 interface LinkProps {
   href: string;
@@ -42,6 +40,9 @@ const MobileNavbar = () => {
       </MyLink>
       <MyLink href="/projects" icon={mdiBriefcase}>
         Projects
+      </MyLink>
+      <MyLink href="/snippets" icon={mdiCodeBraces}>
+        Snippets
       </MyLink>
     </div>
   );

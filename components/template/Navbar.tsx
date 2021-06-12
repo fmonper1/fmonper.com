@@ -1,7 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import Icon from "@mdi/react";
-import { mdiBlogger, mdiBriefcase, mdiHome } from "@mdi/js";
+import { mdiBlogger, mdiBriefcase, mdiCodeBraces, mdiHome } from "@mdi/js";
 import { useRouter } from "next/router";
 
 interface LinkProps {
@@ -30,7 +30,6 @@ const Navbar = () => {
   };
   return (
     <div className="flex flex-col sm:flex-row items-center justify-end space-y-2 sm:space-y-0 sm:space-x-2">
-      {pathname}
       <MyLink href="/">
         <Icon path={mdiHome} size={1} /> Home
       </MyLink>
@@ -39,6 +38,9 @@ const Navbar = () => {
       </MyLink>
       <MyLink href="/projects">
         <Icon path={mdiBriefcase} size={1} /> Projects
+      </MyLink>
+      <MyLink href="/snippets">
+        <Icon path={mdiCodeBraces} size={1} /> Snippets
       </MyLink>
     </div>
   );

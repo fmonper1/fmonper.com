@@ -31,8 +31,8 @@ const GistList = ({ gists }) => {
             className="group w-full transition rounded-sm hover:shadow-lg  hover:bg-white p-2 my-1"
             key={i}
           >
-            <Link href={`gists/${entry.slug}`}>
-              <a href={`gists/${entry.slug}`}>
+            <Link href={`snippets/${entry.slug}`}>
+              <a href={`snippets/${entry.slug}`}>
                 <div className="flex items-center">
                   <div className="mr-3 transition-colors bg-primary-main group-hover:bg-secondary text-white group-focus:text-secondary m-1 rounded-sm">
                     <div className="rounded-sm text-sm p-1">

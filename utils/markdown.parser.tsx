@@ -32,9 +32,15 @@ const MarkdownParser = {
           return renderToString(
             <Title size={level} className={`${level <= 2 ? "pt-3" : ""} group`}>
               <a className="anchor" href={`#${escapedText}`} id={escapedText}>
-                <span className="mr-2 absolute -ml-5 hidden group-hover:block">
+                <span
+                  className="hidden absolute group-hover:inline-block"
+                  style={{
+                    transform: "translateX(-1.5rem)",
+                  }}
+                >
                   #
                 </span>
+
                 {text}
               </a>
             </Title>
@@ -43,8 +49,13 @@ const MarkdownParser = {
         code(code, language) {
           return renderToString(
             <div>
-              <div className="codeblock-lang text-sm font-bold p-2 px-4 bg-secondary-main -mb-0 flex">
-                {language}
+              <div className="flex justify-end transform">
+                <div
+                  className="p-1 px-2 codeblock-lang text-sm font-bold rounded-sm bg-secondary-main"
+                  style={{ transform: "translateY(1rem)" }}
+                >
+                  {language}
+                </div>
               </div>
               <pre className={`language-${language} mt-0`}>
                 <code className={`language-${language}`}>{code}</code>
