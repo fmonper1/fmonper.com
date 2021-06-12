@@ -1,7 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import Icon from "@mdi/react";
-import { mdiBlogger, mdiBriefcase, mdiHome } from "@mdi/js";
+import { mdiBlogger, mdiBriefcase, mdiCodeBraces, mdiHome } from "@mdi/js";
 
 interface LinkProps {
   href: string;
@@ -40,6 +40,9 @@ const MobileNavbar = () => {
       </MyLink>
       <MyLink href="/projects" icon={mdiBriefcase}>
         Projects
+      </MyLink>
+      <MyLink href="/snippets" icon={mdiCodeBraces}>
+        Snippets
       </MyLink>
     </div>
   );
