@@ -5,11 +5,11 @@ import React from "react";
 import Divider from "@components/atoms/Divider";
 import { IMarkdownPost } from "../../services/markdown.service";
 
-interface Props {
+type Props = {
   entry: IMarkdownPost;
-}
+};
 
-function MarkdownPost({ entry }: Props) {
+const MarkdownPost: React.FC<Props> = ({ entry }) => {
   const tag = entry?.tags ? entry?.tags[0] : undefined;
 
   return (
@@ -49,6 +49,6 @@ function MarkdownPost({ entry }: Props) {
       </Link>
     </Card>
   );
-}
+};
 
 export default MarkdownPost;

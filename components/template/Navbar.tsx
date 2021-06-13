@@ -6,6 +6,7 @@ import { useRouter } from "next/router";
 
 interface LinkProps {
   href: string;
+  icon: string;
   children?;
   className?: string;
   props?;
@@ -13,7 +14,7 @@ interface LinkProps {
 
 const Navbar = () => {
   const { pathname } = useRouter();
-  const MyLink = ({ href, children, className, ...props }: LinkProps) => {
+  const MyLink = ({ href, children, className, icon, ...props }: LinkProps) => {
     return (
       <Link href={href}>
         <a
@@ -23,6 +24,8 @@ const Navbar = () => {
           {...props}
           href={href}
         >
+          <Icon path={icon} size={1} className="mr-2" />
+
           {children}
         </a>
       </Link>
@@ -30,17 +33,17 @@ const Navbar = () => {
   };
   return (
     <div className="flex flex-col sm:flex-row items-center justify-end space-y-2 sm:space-y-0 sm:space-x-2">
-      <MyLink href="/">
-        <Icon path={mdiHome} size={1} /> Home
+      <MyLink href="/" icon={mdiHome}>
+        Home
       </MyLink>
-      <MyLink href="/blog">
-        <Icon path={mdiBlogger} size={1} /> Blog
+      <MyLink href="/blog" icon={mdiBlogger}>
+        Blog
       </MyLink>
-      <MyLink href="/projects">
-        <Icon path={mdiBriefcase} size={1} /> Projects
+      <MyLink href="/projects" icon={mdiBriefcase}>
+        Projects
       </MyLink>
-      <MyLink href="/snippets">
-        <Icon path={mdiCodeBraces} size={1} /> Snippets
+      <MyLink href="/snippets" icon={mdiCodeBraces}>
+        Snippets
       </MyLink>
     </div>
   );

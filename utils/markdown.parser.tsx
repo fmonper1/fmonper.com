@@ -40,7 +40,6 @@ const MarkdownParser = {
                 >
                   #
                 </span>
-
                 {text}
               </a>
             </Title>
