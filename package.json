@@ -21,7 +21,7 @@
     "dompurify": "^2.2.2",
     "gray-matter": "^4.0.2",
     "marked": "^1.2.5",
-    "next": "^10.0.3",
+    "next": "^11.0.0",
     "nuka-carousel": "^4.7.4",
     "prettier": "^2.2.1",
     "prismjs": "^1.22.0",
