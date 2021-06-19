@@ -12,6 +12,7 @@
     "@mdi/js": "^5.8.55",
     "@mdi/react": "^1.4.0",
     "@types/nuka-carousel": "^4.4.6",
+    "axios": "^0.21.1",
     "babel-plugin-prismjs": "^2.0.1",
     "classnames": "^2.3.1",
     "clsx": "^1.1.1",
