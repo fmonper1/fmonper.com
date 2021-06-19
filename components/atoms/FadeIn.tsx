@@ -1,26 +1,18 @@
-import { useEffect, useRef, useState } from "react";
+import { useIntersectionObserver } from "../../hooks/use-intersection-observer";
+import classNames from "classnames";
+import animations from "@styles/animations.module.css";
 
 const FadeInSection = ({ children }) => {
-  const [isVisible, setVisible] = useState(false);
-  const [hasShown, setHasShown] = useState(false);
-  const domRef = useRef();
-  useEffect(() => {
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        setVisible(entry.isIntersecting);
-        if (entry.isIntersecting) {
-          setHasShown(true);
-        }
-      });
-    });
-    observer.observe(domRef.current);
-    return () => observer.unobserve(domRef.current);
-  }, []);
+  const [setRef, isIntersecting, hasIntersected] =
+    useIntersectionObserver<HTMLElement>();
+
+  const className = classNames({
+    [animations.scale__base]: true,
+    [animations.scale__entered]: isIntersecting || hasIntersected,
+  });
+
   return (
-    <div
-      className={`fade-in-section ${isVisible || hasShown ? "is-visible" : ""}`}
-      ref={domRef}
-    >
+    <div className={className} ref={setRef}>
       {children}
     </div>
   );

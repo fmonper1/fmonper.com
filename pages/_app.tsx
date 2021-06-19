@@ -10,7 +10,6 @@ export default class MyApp extends App {
     // @ts-ignore
     const { Component, pageProps } = this.props;
 
-    config({ ssrFadeout: true });
     return (
       <div className="flex flex-col min-h-screen">
         <PageHeader />

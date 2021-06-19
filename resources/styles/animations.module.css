@@ -1,0 +1,7 @@
+.scale__base {
+    @apply transform transition duration-700 ease-in-out translate-y-5 opacity-0;
+}
+
+.scale__entered {
+    @apply translate-y-0 opacity-100;
+}
