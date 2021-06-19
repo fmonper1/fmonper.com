@@ -27,7 +27,6 @@ export default function Home({ posts, gists, portfolio, repos }) {
         <TransparentHero>
           <Title size={1} color="text-white" className="my-8">
             Hi, my name is <span className="text-secondary-main">Fernando</span>
-            .
           </Title>
           <Title size={2} color="text-white" className="mb-8">
             I'm a <span className="hero__engineer">software</span> engineer and{" "}

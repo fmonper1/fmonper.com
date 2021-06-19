@@ -3,7 +3,6 @@ import App from "next/app";
 import PageHeader from "@components/template/PageHeader";
 import Footer from "@components/template/Footer";
 import "../resources/styles/style.scss";
-import config from "react-reveal/globals";
 
 export default class MyApp extends App {
   render() {
