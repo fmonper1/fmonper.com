@@ -3,7 +3,7 @@ import Title from "@components/atoms/Title";
 import PortfolioBannerItem from "@components/portfolio/PortfolioBannerItem";
 import Divider from "@components/atoms/Divider";
 import Slider from "@components/atoms/Slider";
-import useWindowSize from "../../../hooks/useWindowSize";
+import useWindowSize from "@hooks/use-window-size";
 
 const chunkArray = (array, chunkSize = 10) => {
   if (!array) return;

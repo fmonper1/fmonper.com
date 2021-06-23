@@ -2,7 +2,7 @@ import React from "react";
 import Title from "@components/atoms/Title";
 import PortfolioBannerItem from "@components/portfolio/PortfolioBannerItem";
 import Divider from "@components/atoms/Divider";
-import useWindowSize from "../../../hooks/useWindowSize";
+import useWindowSize from "@hooks/use-window-size";
 import FadeIn from "@components/atoms/FadeIn";
 
 // const chunkArray = (array, chunkSize = 10) => {

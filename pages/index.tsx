@@ -28,9 +28,14 @@ export default function Home({ posts, gists, portfolio, repos }) {
           <Title size={1} color="text-white" className="my-8">
             Hi, my name is <span className="text-secondary-main">Fernando</span>
           </Title>
+          <Title size={2} color="text-white" className="mb-4">
+            I'm a <span className="">software</span> engineer and fullstack{" "}
+            <span className="hero__typescript">typescript</span> developer.
+          </Title>
           <Title size={2} color="text-white" className="mb-8">
-            I'm a <span className="hero__engineer">software</span> engineer and{" "}
-            <span className="hero__typescript">full-stack</span> developer.
+            Currently, I'm working full-time at{" "}
+            <span className="hero__engineer">MedanoSolution</span> as a frontend
+            developer.
           </Title>
           <div className="mb-8 flex space-x-4">
             <LinkButton href="https://www.linkedin.com/in/fmonper1/">

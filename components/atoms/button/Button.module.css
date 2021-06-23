@@ -1,5 +1,6 @@
 .button {
-    @apply inline-block rounded-md transition duration-100 font-bold p-2 text-base;
+    overflow: hidden;
+    @apply inline-flex rounded-md transition duration-100 font-bold p-2 text-base relative;
 }
 
 .button__xs {
@@ -23,3 +24,5 @@
 .button__primary {
     @apply bg-secondary-main hover:bg-secondary-light text-black;
 }
+
+
