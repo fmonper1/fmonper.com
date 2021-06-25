@@ -62,6 +62,69 @@ export default function PostPage({ post, headings }) {
     </div>
   );
 
+  const PostNavigation = () => (
+    <div
+      id="post-navigation"
+      className="my-8 flex items-center justify-center flex-wrap space-y-2 md:space-y-0"
+    >
+      <div className="w-full md:w-auto group" style={{ minWidth: "270px" }}>
+        {post?.previousPost && (
+          <Link href={`/blog/${post?.previousPost.slug}`}>
+            <a
+              href={`/blog/${post?.previousPost.slug}`}
+              className="transform focus:scale-105 active:scale-105"
+            >
+              <div className="flex w-full justify-between bg-primary p-2 hover:bg-primary-light transition transition-all | transform focus:scale-105 active:scale-105">
+                <Icon
+                  path={mdiArrowLeftBold}
+                  size={2}
+                  className="text-secondary-main transition transform group-hover:-translate-x-1"
+                />
+                <div className="text-white flex items-center px-2 ">
+                  {post?.previousPost.title}
+                </div>
+              </div>
+            </a>
+          </Link>
+        )}
+      </div>
+      <div className="w-full md:w-auto group">
+        <Link href="/">
+          <a href="/" className="transform focus:scale-105 active:scale-105">
+            <div className="md:mx-4 p-2 flex bg-primary hover:bg-primary-light transition transition-all | transform focus:scale-105 active:scale-105 ">
+              <Icon
+                path={mdiHome}
+                size={2}
+                className="text-white transition transform group-hover:scale-110"
+              />
+            </div>
+          </a>
+        </Link>
+      </div>
+      <div className="w-full md:w-auto" style={{ minWidth: "270px" }}>
+        {post?.nextPost && (
+          <Link href={`/blog/${post?.nextPost.slug}`}>
+            <a
+              href={`/blog/${post?.nextPost.slug}`}
+              className="transform focus:scale-105 active:scale-105"
+            >
+              <div className="flex w-full justify-between bg-primary p-2 hover:bg-primary-light transition transition-all | transform focus:scale-105 active:scale-105">
+                <div className="text-white flex items-center px-2">
+                  {post?.nextPost.title}
+                </div>
+                <Icon
+                  path={mdiArrowRightBold}
+                  size={2}
+                  className="text-secondary-main transition transform group-hover:translate-x-1"
+                />
+              </div>
+            </a>
+          </Link>
+        )}
+      </div>
+    </div>
+  );
+
   return (
     <>
       <Head>
@@ -94,64 +157,7 @@ export default function PostPage({ post, headings }) {
             </div>
           </div>
 
-          <div
-            id="post-navigation"
-            className="my-8 flex items-center justify-center flex-wrap space-y-2 md:space-y-0"
-          >
-            <div
-              className="w-full md:w-auto group"
-              style={{ minWidth: "270px" }}
-            >
-              {post?.previousPost && (
-                <Link href={`/blog/${post?.previousPost.slug}`}>
-                  <a href={`/blog/${post?.previousPost.slug}`}>
-                    <div className="flex w-full justify-between bg-primary p-2 hover:bg-primary-light transition transition-colors">
-                      <Icon
-                        path={mdiArrowLeftBold}
-                        size={2}
-                        className="text-secondary-main transition transform group-hover:-translate-x-1"
-                      />
-                      <div className="text-white flex items-center px-2 ">
-                        {post?.previousPost.title}
-                      </div>
-                    </div>
-                  </a>
-                </Link>
-              )}
-            </div>
-            <div className="w-full md:w-auto group">
-              <Link href="/">
-                <a href="/">
-                  <div className="md:mx-4 p-2 flex bg-primary hover:bg-primary-light transition transition-colors ">
-                    <Icon
-                      path={mdiHome}
-                      size={2}
-                      className="text-white transition transform group-hover:scale-110"
-                    />
-                  </div>
-                </a>
-              </Link>
-            </div>
-            <div className="w-full md:w-auto" style={{ minWidth: "270px" }}>
-              {post?.nextPost && (
-                <Link href={`/blog/${post?.nextPost.slug}`}>
-                  <a href={`/blog/${post?.nextPost.slug}`}>
-                    <div className="group flex w-full justify-between bg-primary p-2 hover:bg-primary-light transition transition-colors">
-                      <div className="text-white flex items-center px-2">
-                        {post?.nextPost.title}
-                      </div>
-                      <Icon
-                        path={mdiArrowRightBold}
-                        size={2}
-                        className="text-secondary-main transition transform group-hover:translate-x-1"
-                      />
-                    </div>
-                  </a>
-                </Link>
-              )}
-            </div>
-          </div>
-
+          <PostNavigation />
           {/*<pre>{JSON.stringify(post, null, 2)}</pre>*/}
         </PageContainer>
       </main>
