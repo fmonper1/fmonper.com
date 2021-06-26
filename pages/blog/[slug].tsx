@@ -18,7 +18,7 @@ import {
 import Link from "next/link";
 import clsx from "clsx";
 import LinkButton from "@components/atoms/button/LinkButton";
-
+import Script from "next/script";
 export default function PostPage({ post, headings }) {
   // const html = useMarkdown(post.content);
   useEffect(() => {
@@ -158,7 +158,6 @@ export default function PostPage({ post, headings }) {
           </div>
 
           <PostNavigation />
-          {/*<pre>{JSON.stringify(post, null, 2)}</pre>*/}
         </PageContainer>
       </main>
     </>

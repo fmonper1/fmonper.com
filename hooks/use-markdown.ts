@@ -11,6 +11,7 @@ const useMarkdown = (markdown: string) => {
     const parsed = MarkdownParser.parse(markdown);
     setHtml(DOMPurify.sanitize(parsed));
   }, []);
+
   useEffect(() => {
     if (html === "") return;
     prism.highlightAll();

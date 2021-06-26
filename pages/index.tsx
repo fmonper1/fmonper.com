@@ -46,11 +46,11 @@ export default function Home({ posts, gists, portfolio, repos }) {
             </LinkButton>
           </div>
         </TransparentHero>
-        <PageContainer>
-          <FadeIn>
-            <CardSection />
-          </FadeIn>
-        </PageContainer>
+        {/*<PageContainer>*/}
+        {/*  <FadeIn>*/}
+        {/*    <CardSection />*/}
+        {/*  </FadeIn>*/}
+        {/*</PageContainer>*/}
         <PageContainer>
           <FadeIn>
             <PostList posts={posts} />

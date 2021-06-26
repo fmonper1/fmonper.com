@@ -21,7 +21,7 @@ const Card = ({
 }: Props) => {
   return (
     <div
-      className={`bg-white rounded-md p-4 transition duration-200 shadow-lg hover:shadow-xl  border-1 w-full space-y-4 ${className}`}
+      className={`bg-white rounded-md p-4 transition duration-200 shadow-lg hover:shadow-xl  border-1 w-full space-y-4 flex flex-col ${className}`}
     >
       {(title || extra) && (
         <div className="flex flex-wrap">

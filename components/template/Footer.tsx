@@ -19,13 +19,13 @@ const Footer = () => {
             <div>
               <ul className="space-y-4">
                 <li>
-                  <a href="blog">home</a>
+                  <a href="/">home</a>
                 </li>
                 <li>
                   <a href="blog">blog</a>
                 </li>
                 <li>
-                  <a href="blog">projects</a>
+                  <a href="projects">projects</a>
                 </li>
               </ul>
             </div>
