@@ -2,11 +2,13 @@ import React from "react";
 import Title from "@components/atoms/Title";
 import Divider from "@components/atoms/Divider";
 import Link from "next/link";
-import { mdiLanguageTypescript, mdiReact } from "@mdi/js";
+import { mdiLanguageTypescript, mdiNut, mdiReact } from "@mdi/js";
 import Icon from "@mdi/react";
 
 const getIcon = (tag: string): any => {
   switch (tag) {
+    case "react-admin":
+      return mdiNut;
     case "typescript":
       return mdiLanguageTypescript;
     case "react":

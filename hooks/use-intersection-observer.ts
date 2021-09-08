@@ -7,7 +7,7 @@ interface Props {
 }
 
 const defaultOptions = {
-  rootMargin: "100px",
+  rootMargin: "50px",
   threshold: 0.4,
 };
 
