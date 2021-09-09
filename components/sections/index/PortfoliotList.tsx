@@ -2,23 +2,9 @@ import React from "react";
 import Title from "@components/atoms/Title";
 import PortfolioBannerItem from "@components/portfolio/PortfolioBannerItem";
 import Divider from "@components/atoms/Divider";
-import useWindowSize from "@hooks/use-window-size";
 import FadeIn from "@components/atoms/FadeIn";
 
-// const chunkArray = (array, chunkSize = 10) => {
-//   if (!array) return;
-//   const chunkArray = [];
-//   let chunk;
-//   for (let i = 0; i < array.length; i += chunkSize) {
-//     chunk = array.slice(i, i + chunkSize);
-//     chunkArray.push(chunk);
-//   }
-//   return chunkArray;
-// };
-
 const PortfolioList = ({ items }) => {
-  const { width, isXs, isSm } = useWindowSize();
-
   return (
     <>
       <div className="flex items-center space-x-4">

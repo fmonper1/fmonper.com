@@ -1,7 +1,5 @@
 import Title from "@components/atoms/Title";
 import React from "react";
-import Button from "@components/atoms/button/Button";
-import Link from "next/link";
 import LinkButton from "@components/atoms/button/LinkButton";
 
 interface Props {
@@ -54,7 +52,7 @@ function PortfolioBannerItem({ entry, reverse }: Props) {
           <div
             className="rounded-lg bg-cover bg-top "
             style={{
-              backgroundImage: `url(https:${file.url})`,
+              backgroundImage: `url(${file.url})`,
               height: "350px",
               width: "220px",
             }}
@@ -80,7 +78,7 @@ function PortfolioBannerItem({ entry, reverse }: Props) {
           <div
             className="rounded-lg bg-cover  bg-top"
             style={{
-              backgroundImage: `url(https:${file.url})`,
+              backgroundImage: `url(${file.url})`,
               height: "400px",
             }}
           />
