@@ -7,8 +7,8 @@ interface Props {
   reverse?: boolean;
 }
 function PortfolioBannerItem({ entry, reverse }: Props) {
-  const { title, description, previewUrl, stack } = entry?.fields;
-  const { file } = entry?.fields?.cover.fields;
+  const { title, description, previewUrl, stack } = entry;
+  const { file } = entry?.cover;
 
   return (
     <div
