@@ -18,6 +18,7 @@ const Button: React.FC<ButtonProps & { onClick?: (any) => void }> = ({
         [styles.button__lg]: size === "lg",
         [styles.button__xl]: size === "xl",
         [styles.button__default]: style === "default",
+        [styles.button__secondary]: style === "secondary",
         [styles.button__link]: style === "link",
         [styles.button__primary]: style === "primary",
       })}

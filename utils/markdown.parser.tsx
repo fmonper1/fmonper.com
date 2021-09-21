@@ -1,10 +1,11 @@
-import marked, { Renderer } from "marked";
+import marked from "marked";
 import { renderToString } from "react-dom/server";
 import Link from "next/link";
 import Icon from "@mdi/react";
 import { mdiOpenInNew } from "@mdi/js";
 import Title from "@components/atoms/Title";
 import React from "react";
+import Codebox from "@components/atoms/Codebox";
 
 const MarkdownParser = {
   parse(markdown: string) {
@@ -46,21 +47,7 @@ const MarkdownParser = {
           );
         },
         code(code, language) {
-          return renderToString(
-            <div>
-              <div className="flex justify-end transform">
-                <div
-                  className="p-1 px-2 codeblock-lang text-sm font-bold rounded-sm bg-secondary-main"
-                  style={{ transform: "translateY(1rem)" }}
-                >
-                  {language}
-                </div>
-              </div>
-              <pre className={`language-${language} mt-0`}>
-                <code className={`language-${language}`}>{code}</code>
-              </pre>
-            </div>
-          );
+          return renderToString(<Codebox code={code} language={language} />);
         },
       },
     });

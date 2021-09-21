@@ -111,5 +111,6 @@ export default [
     description:
       "Marketing site for a car ownership transfer business. The site acts as a funnel to attract new clients to the business.",
     stack: "NextJs, Tailwind, NestJs, Docker",
+    previewUrl: "https://autotraspaso-fmonper1.netlify.app/",
   },
 ];

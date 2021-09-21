@@ -52,8 +52,8 @@ export default function PostPage({ post }) {
               style={{ minWidth: "270px" }}
             >
               {post?.previousPost && (
-                <Link href={`/gists/${post?.previousPost.slug}`}>
-                  <a href={`/gists/${post?.previousPost.slug}`}>
+                <Link href={`/snippets/${post?.previousPost.slug}`}>
+                  <a href={`/snippets/${post?.previousPost.slug}`}>
                     <div className="flex w-full justify-between bg-primary p-2 hover:bg-primary-light transition transition-colors">
                       <Icon
                         path={mdiArrowLeftBold}
@@ -83,8 +83,8 @@ export default function PostPage({ post }) {
             </div>
             <div className="w-full md:w-auto" style={{ minWidth: "270px" }}>
               {post?.nextPost && (
-                <Link href={`/gists/${post?.nextPost.slug}`}>
-                  <a href={`/gists/${post?.nextPost.slug}`}>
+                <Link href={`/snippets/${post?.nextPost.slug}`}>
+                  <a href={`/snippets/${post?.nextPost.slug}`}>
                     <div className="group flex w-full justify-between bg-primary p-2 hover:bg-primary-light transition transition-colors">
                       <div className="text-white flex items-center px-2">
                         {post?.nextPost.title}

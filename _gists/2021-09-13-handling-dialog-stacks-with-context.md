@@ -18,105 +18,105 @@ Below you can find both the `<DialogProvider>` which can take an initialValue fo
 import * as React from "react";
 
 export interface DialogConfig {
-  component: React.ReactElement<any, any>;
+    component: React.ReactElement<any, any>;
 }
 
 /**
  * Index will start at 0 and be set to -1 when the stack has been cleared
  */
 type DialogContextState = {
-  index: number;
-  dialog: DialogConfig[];
+    index: number;
+    dialog: DialogConfig[];
 };
 
 type ReducerAction =
-  | {
-      type: "CREATE_STACK";
-      dialog: DialogConfig[];
-    }
-  | {
-      type: "PUSH_DIALOG";
-      dialog: React.ReactElement;
-    }
-  | { type: "INCREASE_INDEX" }
-  | { type: "REDUCE_INDEX" }
-  | { type: "POP_DIALOG" }
-  | { type: "CLEAR_STACK" };
+    | {
+    type: "CREATE_STACK";
+    dialog: DialogConfig[];
+}
+    | {
+    type: "PUSH_DIALOG";
+    dialog: React.ReactElement;
+}
+    | { type: "INCREASE_INDEX" }
+    | { type: "REDUCE_INDEX" }
+    | { type: "POP_DIALOG" }
+    | { type: "CLEAR_STACK" };
 
 const DialogsContextState = React.createContext<DialogContextState | undefined>(
-  undefined
+    undefined
 );
 const DialogsContextReducer = React.createContext<
-  React.Dispatch<ReducerAction> | undefined
->(undefined);
+    React.Dispatch<ReducerAction> | undefined
+    >(undefined);
 
 const dialogReducer = (
-  state: DialogContextState,
-  action: ReducerAction
+    state: DialogContextState,
+    action: ReducerAction
 ): DialogContextState => {
-  switch (action.type) {
-    case "CREATE_STACK": {
-      return {
-        index: 0,
-        dialog: action.dialog,
-      };
+    switch (action.type) {
+        case "CREATE_STACK": {
+            return {
+                index: 0,
+                dialog: action.dialog
+            };
+        }
+        case "INCREASE_INDEX": {
+            return {
+                ...state,
+                index: state.index + 1
+            };
+        }
+        case "REDUCE_INDEX": {
+            return {
+                ...state,
+                index: state.index - 1 >= 0 ? state.index - 1 : 0
+            };
+        }
+        case "PUSH_DIALOG": {
+            return {
+                ...state,
+                dialog: [
+                    ...state.dialog,
+                    {
+                        component: action.dialog
+                    }
+                ]
+            };
+        }
+        case "POP_DIALOG": {
+            return {
+                ...state,
+                dialog: state.dialog.slice(1)
+            };
+        }
+        case "CLEAR_STACK": {
+            return {
+                index: -1,
+                dialog: []
+            };
+        }
     }
-    case "INCREASE_INDEX": {
-      return {
-        ...state,
-        index: state.index + 1,
-      };
-    }
-    case "REDUCE_INDEX": {
-      return {
-        ...state,
-        index: state.index - 1 >= 0 ? state.index - 1 : 0,
-      };
-    }
-    case "PUSH_DIALOG": {
-      return {
-        ...state,
-        dialog: [
-          ...state.dialog,
-          {
-            component: action.dialog,
-          },
-        ],
-      };
-    }
-    case "POP_DIALOG": {
-      return {
-        ...state,
-        dialog: state.dialog.slice(1),
-      };
-    }
-    case "CLEAR_STACK": {
-      return {
-        index: -1,
-        dialog: [],
-      };
-    }
-  }
 };
 
 const DialogProvider: React.FC<{ initialValue?: DialogContextState }> = (
-  props
+    props
 ) => {
-  const [state, dispatch] = React.useReducer(
-    dialogReducer,
-    props.initialValue ?? {
-      index: -1,
-      dialog: [],
-    }
-  );
+    const [state, dispatch] = React.useReducer(
+        dialogReducer,
+        props.initialValue ?? {
+            index: -1,
+            dialog: []
+        }
+    );
 
-  return (
-    <DialogsContextState.Provider value={state}>
-      <DialogsContextDispatch.Provider value={dispatch}>
-        {props.children}
-      </DialogsContextDispatch.Provider>
-    </DialogsContextState.Provider>
-  );
+    return (
+        <DialogsContextState.Provider value={state}>
+            <DialogsContextReducer.Provider value={dispatch}>
+                {props.children}
+            </DialogsContextReducer.Provider>
+        </DialogsContextState.Provider>
+    );
 };
 
 /**
@@ -124,70 +124,70 @@ const DialogProvider: React.FC<{ initialValue?: DialogContextState }> = (
  * that only push dialogs to the context
  */
 function useDialogContextState() {
-  const context = React.useContext(DialogsContextDispatch);
-  if (!context) {
-    throw new Error(`useDialogContext must be used within a DialogProvider`);
-  }
-  const state = context;
+    const context = React.useContext(DialogsContextState);
+    if (!context) {
+        throw new Error(`useDialogContext must be used within a DialogProvider`);
+    }
+    const state = context;
 
-  return state;
+    return state;
 }
 
 function useDialogContext() {
-  const context = React.useContext(DialogsContextDispatch);
-  if (!context) {
-    throw new Error(`useDialogContext must be used within a DialogProvider`);
-  }
-  const dispatch = context;
+    const context = React.useContext(DialogsContextReducer);
+    if (!context) {
+        throw new Error(`useDialogContext must be used within a DialogProvider`);
+    }
+    const dispatch = context;
 
-  const pushDialog = (dialog: React.ReactElement) => {
-    dispatch({
-      type: "PUSH_DIALOG",
-      dialog,
-    });
-  };
+    const pushDialog = (dialog: React.ReactElement) => {
+        dispatch({
+            type: "PUSH_DIALOG",
+            dialog
+        });
+    };
 
-  const popDialog = () => {
-    dispatch({
-      type: "POP_DIALOG",
-    });
-  };
+    const popDialog = () => {
+        dispatch({
+            type: "POP_DIALOG"
+        });
+    };
 
-  const clearDialogStack = () => {
-    console.log("clearing dialog stack");
-    dispatch({
-      type: "CLEAR_STACK",
-    });
-  };
+    const clearDialogStack = () => {
+        console.log("clearing dialog stack");
+        dispatch({
+            type: "CLEAR_STACK"
+        });
+    };
 
-  const createDialogStack = (dialogs: DialogConfig[]) => {
-    dispatch({
-      type: "CREATE_STACK",
-      dialog: dialogs,
-    });
-  };
+    const createDialogStack = (dialogs: DialogConfig[]) => {
+        dispatch({
+            type: "CREATE_STACK",
+            dialog: dialogs
+        });
+    };
 
-  const showNextDialog = () => {
-    dispatch({
-      type: "INCREASE_INDEX",
-    });
-  };
+    const showNextDialog = () => {
+        dispatch({
+            type: "INCREASE_INDEX"
+        });
+    };
 
-  const showPreviousDialog = () => {
-    dispatch({
-      type: "REDUCE_INDEX",
-    });
-  };
+    const showPreviousDialog = () => {
+        dispatch({
+            type: "REDUCE_INDEX"
+        });
+    };
 
-  return {
-    dispatch,
-    pushDialog,
-    popDialog,
-    clearDialogStack,
-    createDialogStack,
-    showNextDialog,
-    showPreviousDialog,
-  };
+    return {
+        dispatch,
+        pushDialog,
+        popDialog,
+        clearDialogStack,
+        createDialogStack,
+        showNextDialog,
+        showPreviousDialog
+    };
 }
 
 export { DialogProvider, useDialogContext, useDialogContextState };
@@ -201,41 +201,52 @@ The `<DialogConsumer>` clones the dialogs from the stack and provides some defau
 // dialog-consumer.tsx
 import React from "react";
 
-import { useDialogContext, DialogConfig } from "./dialog-context";
+import {
+    useDialogContext,
+    useDialogContextState,
+    DialogConfig
+} from "./dialog-context";
 
 /**
  * Gets the dialog component from the state and creates a copy
  * of it to be displayed on the page.
  */
 const DialogConsumer: React.FC = () => {
-  const { showPreviousDialog, clearDialogStack } = useDialogContext();
-  const { index, dialog } = useDialogContextState();
+    const { showPreviousDialog, clearDialogStack } = useDialogContext();
+    const { index, dialog } = useDialogContextState();
 
-  return (
-    <>
-      {dialog.map((theDialog: DialogConfig, i: number) => {
-        return React.cloneElement(
-          theDialog.component,
-          {
-            ...theDialog.component.props,
-            key: i,
-            open: i === index, // only open the last one
-            title: theDialog.component.props.title, //only debug
-            onClose: () => {
-              showPreviousDialog();
-              console.log(theDialog.component.props.title + " closed");
-            },
-            /** Dialogs from the context clear the stack when clicking the cross icon */
-            onCloseCrossClick: clearDialogStack,
-          },
-          theDialog.component.props.children
-        );
-      })}
-    </>
-  );
+    return (
+        <>
+            {dialog.map((theDialog: DialogConfig, i: number) => {
+                return React.cloneElement(
+                    theDialog.component,
+                    {
+                        ...theDialog.component.props,
+                        key: i,
+                        open: i === index, // only open the last one
+                        title: theDialog.component.props.title, //only debug
+                        onClose: () => {
+                            showPreviousDialog();
+                            console.log(theDialog.component.props.title + " closed");
+                        },
+                        /** Dialogs from the context clear the stack when clicking the cross icon */
+                        onCloseCrossClick: clearDialogStack
+                    },
+                    theDialog.component.props.children
+                );
+            })}
+        </>
+    );
 };
 
 export default DialogConsumer;
 ```
+
+<iframe src="https://codesandbox.io/embed/dialogs-flows-in-context-6o0ci?fontsize=14&hidenavigation=1&theme=dark"
+style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;"
+title="Dialogs Flows In Context"
+allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
+sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
+/>
 
 A more advanced example would handle dialog-flows utilizing DAG's or FSM's such as [X-State](https://xstate.com/).

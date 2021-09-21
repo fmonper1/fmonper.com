@@ -1,10 +1,10 @@
 .button {
     overflow: hidden;
-    @apply inline-flex rounded-md transition duration-100 font-bold p-2 text-base relative;
+    @apply inline-flex justify-center items-center rounded-md transition duration-100 font-bold p-2 text-base relative;
 }
 
 .button__xs {
-    @apply p-1 text-base;
+    @apply p-1 px-2 text-base;
 }
 .button__lg {
     @apply p-4 text-xl;
@@ -15,6 +15,10 @@
 
 .button__default {
     @apply bg-secondary-main hover:bg-secondary-light text-black
+}
+
+.button__secondary {
+    @apply bg-primary-main hover:bg-primary-light text-white
 }
 
 .button__link {
