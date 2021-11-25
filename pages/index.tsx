@@ -34,8 +34,7 @@ export default function Home({ posts, gists, portfolio, repos }) {
           </Title>
           <Title size={2} color="text-white" className="mb-8">
             Currently, I'm working full-time at{" "}
-            <span className="hero__engineer">MedanoSolution</span> as a frontend
-            developer.
+            <span className="hero__engineer">Dekalabs</span> as a Software Engineer.
           </Title>
           <div className="mb-8 flex space-x-4">
             <LinkButton href="https://www.linkedin.com/in/fmonper1/">

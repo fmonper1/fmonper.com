@@ -8,7 +8,7 @@ interface Props {
 }
 function PortfolioBannerItem({ entry, reverse }: Props) {
   const { title, description, previewUrl, stack } = entry;
-  const { file } = entry?.cover;
+  const { desktop, mobile } = entry?.cover;
 
   return (
     <div
@@ -52,7 +52,7 @@ function PortfolioBannerItem({ entry, reverse }: Props) {
           <div
             className="rounded-lg bg-cover bg-top "
             style={{
-              backgroundImage: `url(${file.url})`,
+              backgroundImage: `url(${mobile?.url ?? desktop.url})`,
               height: "350px",
               width: "220px",
             }}
@@ -78,7 +78,7 @@ function PortfolioBannerItem({ entry, reverse }: Props) {
           <div
             className="rounded-lg bg-cover  bg-top"
             style={{
-              backgroundImage: `url(${file.url})`,
+              backgroundImage: `url(${desktop.url})`,
               height: "400px",
             }}
           />
