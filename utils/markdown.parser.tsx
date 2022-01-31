@@ -19,10 +19,10 @@ const MarkdownParser = {
             <Link href={href}>
               <a
                 href={href}
-                className="inline-flex items-end text-primary-main underline"
+                className="inline-flex items-end text-primary-main "
               >
                 {text}
-                <Icon path={mdiOpenInNew} size={0.75} />
+                <Icon path={mdiOpenInNew} size={0.65} />
               </a>
             </Link>
           );

@@ -15,7 +15,7 @@ export default function Blog({ posts }) {
 
       <TransparentHero
         title="Blog"
-        subtitle="1 new post per year if you're lucky"
+        subtitle="one new post per year... if you're lucky"
       />
       <PageContainer>
         <div className="space-y-4">

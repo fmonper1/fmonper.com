@@ -25,17 +25,26 @@ export default function Home({ posts, gists, portfolio, repos }) {
       </Head>
       <main className="space-y-8 md:space-y-10">
         <TransparentHero>
-          <Title size={1} color="text-white" className="my-8">
-            Hi, my name is <span className="text-secondary-main">Fernando</span>
+          <Title size={1} color="text-white" className="my-10">
+            Hi there, my name is{" "}
+            <span className="text-secondary-main">Fernando </span>
           </Title>
           <Title size={2} color="text-white" className="mb-4">
             I'm a <span className="">software</span> engineer and fullstack{" "}
-            <span className="hero__typescript">typescript</span> developer.
+            <span className="hero__typescript">Typescript</span> developer.
           </Title>
-          <Title size={2} color="text-white" className="mb-8">
+          <Title size={2} color="text-white" className="mb-10">
             Currently, I'm working full-time at{" "}
-            <span className="hero__engineer">Dekalabs</span> as a Software Engineer.
+            <span className="hero__engineer">Dekalabs</span> as a Software
+            Engineer.
           </Title>
+          <Title size={4} color="text-white" className="mb-8">
+            My work mostly requires me to use{" "}
+            <span className="hero__react">React</span> and{" "}
+            <span className="hero__typescript">Typescript</span> but my
+            experience includes Nodejs, Python, Web3, SQL, Mongo and more.
+          </Title>
+
           <div className="mb-8 flex space-x-4">
             <LinkButton href="https://www.linkedin.com/in/fmonper1/">
               <Icon path={mdiLinkedin} size={1} className="mr-2" /> LinkedIn

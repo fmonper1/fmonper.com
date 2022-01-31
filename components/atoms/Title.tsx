@@ -51,7 +51,10 @@ const Title: React.FC<TitleProps> = ({
       );
     case 4:
       return (
-        <h4 className={`text-md md:text-xl ${className} ${baseCss}`} {...props}>
+        <h4
+          className={`text-md md:text-xl font-bold ${className} ${baseCss}`}
+          {...props}
+        >
           {children}
         </h4>
       );

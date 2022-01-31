@@ -1,32 +1,30 @@
 .button {
-    overflow: hidden;
-    @apply inline-flex justify-center items-center rounded-md transition duration-100 font-bold p-2 text-base relative;
+  overflow: hidden;
+  @apply inline-flex justify-center items-center rounded-md transition duration-100 font-bold p-2 text-base relative hover:scale-105;
 }
 
 .button__xs {
-    @apply p-1 px-2 text-base;
+  @apply p-1 px-2 text-base;
 }
 .button__lg {
-    @apply p-4 text-xl;
+  @apply p-4 text-xl;
 }
 .button__xl {
-    @apply p-6 text-xl;
+  @apply p-6 text-xl;
 }
 
 .button__default {
-    @apply bg-secondary-main hover:bg-secondary-light text-black
+  @apply bg-secondary-main hover:bg-secondary-light text-black;
 }
 
 .button__secondary {
-    @apply bg-primary-main hover:bg-primary-light text-white
+  @apply bg-primary-main hover:bg-primary-light text-white;
 }
 
 .button__link {
-    @apply bg-transparent hover:bg-white hover:bg-primary-main text-secondary-main;
+  @apply bg-transparent hover:bg-white hover:bg-primary-main text-secondary-main;
 }
 
 .button__primary {
-    @apply bg-secondary-main hover:bg-secondary-light text-black;
+  @apply bg-secondary-main hover:bg-secondary-light text-black;
 }
-
-
